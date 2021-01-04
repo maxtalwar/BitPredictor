@@ -4,7 +4,7 @@ import analysis as a
 import robin_stocks as r
 from time import sleep
 from datetime import datetime
-import pync
+#import pync
 
 steps = int(input("How many cycles? "))
 
@@ -107,18 +107,18 @@ def cycle(step, oldPrice, purchasePrice, appreciation, steps, time, amount, oldI
         if (diff > 1):
             #r.order_sell_crypto_by_price('BCH', amount, timeInForce='gtc')
             print("Sold asset (Taking gains)")
-            pync.notify('Sold asset (Taking gains)', title='BitTrader')
+            #pync.notify('Sold asset (Taking gains)', title='BitTrader')
             owned = False
         elif (prediction == True and not owned and not suspended):
             #r.order_buy_crypto_by_quantity("BCH", amountInAsset)
             print("Bought asset")
-            pync.notify('Bought Asset', title='BitTrader')
+            #pync.notify('Bought Asset', title='BitTrader')
             owned = True
             purchasePrice = price
         elif (prediction == False and owned and not suspended):
             #r.order_sell_crypto_by_quantity('BCH', amountInAsset)
             print("Sold asset")
-            pync.notify('Sold Asset', title='BitTrader')
+            #pync.notify('Sold Asset', title='BitTrader')
             owned = False
         else:
             if (not owned):
@@ -145,7 +145,7 @@ if owned:
     r.order_sell_crypto_by_quantity('BCH', amountInAsset, timeInForce='gtc')
     print("Closing out - sold assets")
 
-pync.notify('Program complete', title='BitTrader')
+#pync.notify('Program complete', title='BitTrader')
 
 # Notes:
 # if the EMA is more than the MA and the MA has begun to trend upwards, it 
