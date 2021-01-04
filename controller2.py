@@ -71,7 +71,7 @@ def cycle(step, oldPrice, purchasePrice, appreciation, steps, time, amount, oldI
         else:
             results = 0
 
-        placeholder = [indicators[0], results, indicators[2], indicators[3], indicators[4]]
+        placeholder = [indicators[0], results, indicators[2], indicators[3]]
 
         a.store_csv_indicators(placeholder, time, 'predict.csv')
 
