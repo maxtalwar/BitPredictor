@@ -16,7 +16,8 @@ def train(step, dp, oldPrice, steps, minutes, macds):
         if (step == steps):
             print("Not enough data collected for training")
             a.append_list_as_row('prices.csv', [], 'a')
-
+        
+        price = 0
         try:
             price = data.price()
         except:
