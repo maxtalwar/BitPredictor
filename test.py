@@ -41,6 +41,7 @@ originalPrice = d.price()
 def test(limit, time, startingHoldings, oldMACD = 0):
     global total, correct, buy, oldPrice, i, holdings, change
 
+    price = 0
     try:
         price = d.price()
     except:
@@ -94,7 +95,7 @@ def test(limit, time, startingHoldings, oldMACD = 0):
             print("Bought")
         else:
             buy = False
-            change = Trues
+            change = True
             print("Sold")
         
         print("HOLDINGS: $" + str(holdings))
