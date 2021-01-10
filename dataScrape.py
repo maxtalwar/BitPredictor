@@ -33,7 +33,7 @@ def MACD():
 
     # Print result
     
-    #print(result)
+    print(result)
     return round(float(result["valueMACDHist"]), 4)
 
 def RSI():
@@ -58,7 +58,7 @@ def RSI():
     result = response.json() 
 
     # Print result
-    #print(result)
+    print(result)
     return round(float(result['value']), 4)
 
 def MA():
@@ -84,6 +84,7 @@ def MA():
 
     # Print result
     #print(result)
+    print(result)
     return round(float(result['value']), 4)
 
 def EMA():
@@ -108,36 +109,17 @@ def EMA():
     result = response.json() 
 
     # Print result
+    print(result)
     return round(float(result['value']), 4)
 
+def price(ticker = "BCH", priceType = 'ask_price'):
+    return float(r.crypto.get_crypto_quote("ETH", priceType))
 
-"""def STOCH_RSI():
-    # Define indicator
-    indicator = "stochrsi"
-    
-    # Define endpoint 
-    endpoint = f"https://api.taapi.io/{indicator}"
-    
-    # Define a parameters dict for the parameters to be sent to the API 
-    parameters = {
-        'secret': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5sZWFmZXIwNUBnbWFpbC5jb20iLCJpYXQiOjE2MDgwNzc2ODUsImV4cCI6NzkxNTI3NzY4NX0.mtwEhqsNv0E76gXPHtdNn4GHmg8XkQp2S8G988pyA70',
-        'exchange': 'binance',
-        'symbol': 'BCH/USDT',
-        'interval': '5m'
-        } 
-    
-    # Send get request and save the response as response object 
-    response = requests.get(url = endpoint, params = parameters)
-    
-    # Extract data in json format 
-    result = response.json() 
+def buy(amountInAsset, ticker = "BCH"):
+    r.order_buy_crypto_by_quantity(ticker, amountInAsset, priceType = 'bid_price')
 
-    # Print result
-    return round(float(result['valueFastK']), 4)"""
-
-def price():
-    return float(r.crypto.get_crypto_quote("BCH")['ask_price'])
-    
+def sell(amountInAsset, ticker = "BCH"):
+    r.order_sell_crypto_by_quantity(ticker, amountInAsset, 'ask_price')
 
 def dataPoints():
     ma = round(a.percentDiff(MA(), price()), 4)

@@ -105,20 +105,17 @@ def cycle(step, oldPrice, purchasePrice, appreciation, steps, time, amount, oldI
         print("Predicted asset appreciation: " + str(prediction))
         
         if (diff > 1):
-            #r.order_sell_crypto_by_price('BCH', amount, timeInForce='gtc')
+            r.order_sell_crypto_by_price('BCH', amountInAsset, timeInForce='gtc')
             print("Sold asset (Taking gains)")
-            #pync.notify('Sold asset (Taking gains)', title='BitTrader')
             owned = False
         elif (prediction == True and not owned and not suspended):
-            #r.order_buy_crypto_by_quantity("BCH", amountInAsset)
+            r.order_buy_crypto_by_quantity("BCH", amountInAsset)
             print("Bought asset")
-            #pync.notify('Bought Asset', title='BitTrader')
             owned = True
             purchasePrice = price
         elif (prediction == False and owned and not suspended):
-            #r.order_sell_crypto_by_quantity('BCH', amountInAsset)
+            r.order_sell_crypto_by_quantity('BCH', amountInAsset)
             print("Sold asset")
-            #pync.notify('Sold Asset', title='BitTrader')
             owned = False
         else:
             if (not owned):

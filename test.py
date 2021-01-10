@@ -48,8 +48,8 @@ def test(limit, time, startingHoldings, oldMACD = 0):
         print("getting price data failed")
         i += 1
         macd = d.dataPoints()[1]
-        test(limit, time, startingHoldings, macd)
         sleep(120)
+        test(limit, time, startingHoldings, macd)
 
     if (i > 0):
         print(oldPrice)
