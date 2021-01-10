@@ -30,10 +30,8 @@ def MACD():
     
     # Extract data in json format 
     result = response.json() 
-
-    # Print result
     
-    print(result)
+    #print(result)
     return round(float(result["valueMACDHist"]), 4)
 
 def RSI():
@@ -57,8 +55,7 @@ def RSI():
     # Extract data in json format 
     result = response.json() 
 
-    # Print result
-    print(result)
+    #print(result)
     return round(float(result['value']), 4)
 
 def MA():
@@ -82,9 +79,7 @@ def MA():
     # Extract data in json format 
     result = response.json() 
 
-    # Print result
     #print(result)
-    print(result)
     return round(float(result['value']), 4)
 
 def EMA():
@@ -108,8 +103,7 @@ def EMA():
     # Extract data in json format 
     result = response.json() 
 
-    # Print result
-    print(result)
+    #print(result)
     return round(float(result['value']), 4)
 
 def price(ticker = "BCH", priceType = 'ask_price'):
