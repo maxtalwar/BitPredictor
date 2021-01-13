@@ -89,4 +89,4 @@ def complexStrat(indicators, oldIndicators):
         
     
 def stratAI():
-    return (predict() == 1)
+    return (predict() > 0)

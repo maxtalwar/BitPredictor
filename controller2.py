@@ -47,10 +47,12 @@ diff = 0
 
 suspended = False
 
+ticker = "BCH"
+
 print('\n')
 
 def cycle(step, oldPrice, purchasePrice, appreciation, steps, time, amount, oldIndicators):
-    global owned, correct, total, holdings, diff, halfway, suspended
+    global owned, correct, total, holdings, diff, halfway, suspended, ticker
 
     
     if (step > 0):
@@ -105,16 +107,16 @@ def cycle(step, oldPrice, purchasePrice, appreciation, steps, time, amount, oldI
         print("Predicted asset appreciation: " + str(prediction))
         
         if (diff > 1):
-            r.order_sell_crypto_by_price('BCH', amountInAsset, timeInForce='gtc')
+            r.order_sell_crypto_by_price(ticker, amountInAsset, timeInForce='gtc')
             print("Sold asset (Taking gains)")
             owned = False
         elif (prediction == True and not owned and not suspended):
-            r.order_buy_crypto_by_quantity("BCH", amountInAsset)
+            r.order_buy_crypto_by_quantity(ticker, amountInAsset)
             print("Bought asset")
             owned = True
             purchasePrice = price
         elif (prediction == False and owned and not suspended):
-            r.order_sell_crypto_by_quantity('BCH', amountInAsset)
+            r.order_sell_crypto_by_quantity(ticker, amountInAsset)
             print("Sold asset")
             owned = False
         else:

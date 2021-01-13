@@ -3,6 +3,7 @@ import dataScrape as d
 import regression
 from analysis import append_list_as_row
 from time import sleep
+#import emailClient as email
 
 # Logs into Robinhood
 login = r.login(username="maxnmtalwar@gmail.com",
@@ -43,8 +44,4 @@ append_list_as_row("predict.csv", dp, 'a')"""
         print("Current cycle failed")
     sleep(120)"""
 
-r.order_buy_crypto_by_quantity("BTC", .0001)
-
-sleep(300)
-
-r.order_sell_crypto_by_quantity("BTC", .0001)
+print(regression.predict())

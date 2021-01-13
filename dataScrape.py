@@ -79,7 +79,7 @@ def MA():
     # Extract data in json format 
     result = response.json() 
 
-    #print(result)
+    print(result)
     return round(float(result['value']), 4)
 
 def EMA():
@@ -107,7 +107,7 @@ def EMA():
     return round(float(result['value']), 4)
 
 def price(ticker = "BCH", priceType = 'ask_price'):
-    return float(r.crypto.get_crypto_quote("ETH", priceType))
+    return float(r.crypto.get_crypto_quote(ticker, priceType))
 
 def buy(amountInAsset, ticker = "BCH"):
     r.order_buy_crypto_by_quantity(ticker, amountInAsset, priceType = 'bid_price')

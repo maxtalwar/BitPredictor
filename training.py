@@ -2,14 +2,6 @@ import dataScrape as data
 import analysis as a
 from time import sleep
 
-steps = int(input('Steps? '))
-
-minutes = int(input("Time interval? "))
-
-steps += 2
-
-failed = False
-
 def train(step, dp, oldPrice, steps, minutes, macds):
     global failed
     if (step > 0):
@@ -34,6 +26,11 @@ def train(step, dp, oldPrice, steps, minutes, macds):
             print("Total return: " + str(appreciation) + "%")
 
             print(dp)
+
+            print("Current RSI: " + str(dp[0]))
+            print("Current MACD: " + str(dp[1]))
+            print("Current MA: " + str(dp[2]))
+            print("Current EMA: " + str(dp[3]))
             macd = dp[1]
             print(macds)
 
@@ -58,7 +55,10 @@ def train(step, dp, oldPrice, steps, minutes, macds):
             failed = False
         except:
             print("Datapoint scraping failed")
+            print(data.dataPoints())
             failed = True
+            sleep(120)
+            train(steps-step, [], 0, steps-step, minutes, [])
         
         if (failed == False):
             oldPrice = price
@@ -66,10 +66,19 @@ def train(step, dp, oldPrice, steps, minutes, macds):
 
         if (len(macds) == 3):
             macds.pop(0)
-
+        
         sleep(60*minutes)
         train(step-1, dp, oldPrice, steps, minutes, macds)
     return steps
+
+
+steps = int(input('Steps? '))
+
+minutes = int(input("Time interval? "))
+
+steps += 2
+
+failed = False
 
 train(steps, [], 0, steps, minutes, [])
 

@@ -15,6 +15,10 @@ def append_list_as_row(file_name, list_of_elem, action):
         csv_writer.writerow(list_of_elem)
     write_obj.close()
 
+login = r.login(username="maxnmtalwar@gmail.com",
+         password="8#k5uqP9NG@n",
+         expiresIn=86400,
+         by_sms=True)
 
 total = 0
 
@@ -28,11 +32,15 @@ oldPrice = 0
 
 i = 0
 
+print("Program: test")
+
 limit = int(input("Limit: "))
 
 startingHoldings = int(input("Starting holdings: "))
 
 time = int(input("Time? "))
+
+startingHoldings = 10
 
 holdings = startingHoldings
 
@@ -51,6 +59,7 @@ def test(limit, time, startingHoldings, oldMACD = 0):
         sleep(120)
         test(limit, time, startingHoldings, macd)
 
+    print(str(i+1) + ":" + str(limit))
     if (i > 0):
         print(oldPrice)
         print(price)
@@ -69,14 +78,17 @@ def test(limit, time, startingHoldings, oldMACD = 0):
             diff *= 100
             print("Appreciation " + str(diff) + "%")
 
-    if (i < limit):
-        print(str(i+1) + ":" + str(limit))
+    try:
+        dp = d.dataPoints()
+    except:
+        i = limit
+    if (i < limit-1):
 
         headers = ["RSI","MACD","MA","EMA", "TIME","CHANGE"]
 
         append_list_as_row("predict.csv", headers, 'w')
 
-        dp = d.dataPoints()
+
         dp.append(float(time))
 
         macd = dp[1]
@@ -107,7 +119,7 @@ def test(limit, time, startingHoldings, oldMACD = 0):
     
     return ((correct/total)*100)
 
-test(limit, time, startingHoldings)
+test(limit, time, startingHoldings) 
 
 
 print("Correct trades: " + str(correct))
