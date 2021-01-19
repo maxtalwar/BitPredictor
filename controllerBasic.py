@@ -56,7 +56,7 @@ for i in range (10):
     
     print('\n')
 
-    sleep(120)
+    sleep(90)
 
 if (owned):
     r.order_sell_crypto_by_quantity('BCH', amountInAsset)
