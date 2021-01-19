@@ -16,7 +16,7 @@ def train(steps, dp, oldPrice, step, minutes):
             print("Price scraping failed")
             failed = True
 
-        if (not failed):
+        if (not failed and step > 0):
             print("Indicators from previous cycle: ")
             a.showIndicators(dp)
 
@@ -43,7 +43,7 @@ def train(steps, dp, oldPrice, step, minutes):
             print("Datapoint scraping failed")
             failed = True
         
-        if (failed):
+        if (not failed):
             oldPrice = price
 
         sleep(60*minutes)
@@ -53,6 +53,8 @@ def train(steps, dp, oldPrice, step, minutes):
 steps = int(input('Steps? '))
 
 minutes = int(input("Time interval? "))
+
+sleep(15)
 
 failed = False
 
