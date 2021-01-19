@@ -11,7 +11,7 @@ for i in range(5):
 
     email.sendEmail(message)
 
-    #steps = training.train(12, [], 0, 12, 10, [])
+    #steps = training.train(12, [], 0, 12, [], 10)
     #print("Added " + str(steps) + " rows to the dataset")
     print('\n')
     sleep(300)

@@ -2,7 +2,7 @@ import dataScrape as data
 import analysis as a
 from time import sleep
 
-def train(step, dp, oldPrice, steps, minutes, macds):
+def train(step, dp, oldPrice, steps, macds, minutes=15):
     global failed
     if (step > 0):
         if (step == steps):
@@ -58,7 +58,7 @@ def train(step, dp, oldPrice, steps, minutes, macds):
             print(data.dataPoints())
             failed = True
             sleep(120)
-            train(steps-step, [], 0, steps-step, minutes, [])
+            train(step, [], 0, step, [], minutes)
         
         if (failed == False):
             oldPrice = price
@@ -68,7 +68,7 @@ def train(step, dp, oldPrice, steps, minutes, macds):
             macds.pop(0)
         
         sleep(60*minutes)
-        train(step-1, dp, oldPrice, steps, minutes, macds)
+        train(step-1, dp, oldPrice, steps, macds, minutes)
     return steps
 
 
@@ -80,6 +80,6 @@ steps += 2
 
 failed = False
 
-train(steps, [], 0, steps, minutes, [])
+train(steps, [], 0, steps, [], minutes)
 
 print("Complete")
