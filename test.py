@@ -116,7 +116,7 @@ holdings = startingHoldings
 
 originalPrice = d.price()
 
-
+print('\n')
 
 print("Warming up...")
 

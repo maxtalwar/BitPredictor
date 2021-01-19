@@ -102,4 +102,4 @@ def stratAI():
 
 # This is used so that I only need to change the code in one place when I change the strategy.
 def strat(indicators):
-    return complexStrat(indicators)
+    return stratAI()

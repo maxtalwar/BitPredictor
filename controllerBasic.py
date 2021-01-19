@@ -31,7 +31,7 @@ for i in range (10):
 
     price = data.price()
 
-    if (owned and predict == "HOLD"):
+    if (owned and predict != True):
         if (((price - purchasePrice) / purchasePrice)*100 >= .75):
             owned = False
             data.sell('BCH', amountInAsset)

@@ -45,4 +45,4 @@ append_list_as_row("predict.csv", dp, 'a')"""
         print("Current cycle failed")
     sleep(120)"""
 
-print(regression.predict())
+print(regression.predict('prices.csv', 'predict.csv'))

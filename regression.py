@@ -6,17 +6,17 @@ def predict (train = 'prices.csv', predict='predict.csv'):
 
     predict_data = tc.SFrame.read_csv(predict, verbose = False)
 
+    print(predict_data)
+
     # Selects the best model based on your data.
     # boosted_tree_regression seems to be the best type of regression for this data
     model = tc.boosted_trees_classifier.create(train_data, target='CHANGE', features=['RSI', 'MA', 'EMA'], validation_set='auto', verbose=False)
-
-    predict_data = tc.SFrame.read_csv(predict, verbose = False)
 
     # Make predictions and evaluate results.
     predictions = model.predict(predict_data)
     results = model.evaluate(train_data)
 
-    #print(results)
+    print(results)
 
     if (len(predictions) == 1):
         return predictions[0]
