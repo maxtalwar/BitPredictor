@@ -30,6 +30,8 @@ def MACD():
     
     # Extract data in json format 
     result = response.json() 
+
+    # Print result
     
     #print(result)
     return round(float(result["valueMACDHist"]), 4)
@@ -55,6 +57,7 @@ def RSI():
     # Extract data in json format 
     result = response.json() 
 
+    # Print result
     #print(result)
     return round(float(result['value']), 4)
 
@@ -79,7 +82,8 @@ def MA():
     # Extract data in json format 
     result = response.json() 
 
-    print(result)
+    # Print result
+    #print(result)
     return round(float(result['value']), 4)
 
 def EMA():
@@ -103,19 +107,21 @@ def EMA():
     # Extract data in json format 
     result = response.json() 
 
-    #print(result)
+    # Print result
     return round(float(result['value']), 4)
 
-def price(ticker = "BCH", priceType = 'ask_price'):
-    return float(r.crypto.get_crypto_quote(ticker, priceType))
+def price():
+    return float(r.crypto.get_crypto_quote("BCH")['ask_price'])
 
-def buy(amountInAsset, ticker = "BCH"):
-    r.order_buy_crypto_by_quantity(ticker, amountInAsset, priceType = 'bid_price')
+def buy(ticker, amountInAsset):
+    r.order_buy_crypto_by_quantity(ticker, amountInAsset)
+    print("Bought")
 
-def sell(amountInAsset, ticker = "BCH"):
-    r.order_sell_crypto_by_quantity(ticker, amountInAsset, 'ask_price')
-
+def sell(ticker, amountInAsset):
+    r.order_sell_crypto_by_quantity(ticker, amountInAsset)
+    print("Sold")
+    
 def dataPoints():
     ma = round(a.percentDiff(MA(), price()), 4)
     ema = round(a.percentDiff(EMA(), price()), 4)
-    return [RSI(), MACD(), ma, ema]
+    return [RSI(), ma, ema]

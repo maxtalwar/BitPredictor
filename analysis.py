@@ -1,5 +1,6 @@
 from regression import predict
 from csv import *
+import turicreate
 # 5, 2
 # 4, 3
 
@@ -49,35 +50,43 @@ def appreciateRSI(rsi):
 # 1. Checks to ensure the RSI is in a valid range
 # 2. Ensures that the asset was not recently in an uptrend (that may be ending)
 # 3. Checks to see if the exponential moving average is more than the moving average
-# Indicators: RSI, MACD, MA, EMA
-def complexStrat(indicators, oldIndicators):
+# Indicators: RSI, MA, EMA
+def complexStrat(indicators, oldIndicators=[]):
     rsi = indicators[0]
-    macd = indicators[1]
-    ma = indicators[2]
-    ema = indicators[3]
+    ma = indicators[1]
+    ema = indicators[2]
 
-    if (appreciateRSI(rsi)):
-        # makes sure that the moving average and the macd are less than 0 
-        # if the MA and the MACD are more than 0, they may have just finished an uptrend
-        if (oldIndicators[1] < 0 and macd > 0):
-            return True
-        if (oldIndicators[1] > 0 and macd < 0):
-            return False
-        
-        if (oldIndicators[2] > 0 and ma < 0):
-            return True
-        if (oldIndicators[2] < 0 and ma > 0):
-            return False
-        
-        if ((macd - oldIndicators[1]) > (oldIndicators[1]/2)):
-            return True
-        if (macd < oldIndicators[1]):
-            return False
-        # I have noticed that if the EMA is more than the MA, that is the mark of the end of a downward trend
-        #if (direction())
-        return "HOLD"
+    # I have noticed that the ema is greater than the ma at the end of a bull run
+    # if the ema is less than the ma, it may be the beginning of a bull run
+    if (rsi > 65):
+        return False
     
-    return False
+    if (rsi < 35):
+        return True
+    
+    if (rsi > 55 and ma < ema):
+        return False
+    
+    if (rsi < 45 and ema < ma):
+        return True
+    
+    if (rsi > 60 and ma < 0 and ema < 0):
+        return False
+    
+    if (ma > 0 and ema > 0 and rsi < 35):
+        return True
+    
+    
+    return "HOLD"
+
+def showIndicators(indicators):
+    print("Current RSI: " + str(indicators[0]))
+
+    print("Current MA: " + str(indicators[1]))
+
+    print("Current EMA: " + str(indicators[2]))
+    
+    
 
 """def findSell(indicators, oldIndicators):
     rsi = indicators[0]
@@ -89,4 +98,8 @@ def complexStrat(indicators, oldIndicators):
         
     
 def stratAI():
-    return (predict() > 0)
+    return (predict() == 1)
+
+# This is used so that I only need to change the code in one place when I change the strategy.
+def strat(indicators):
+    return complexStrat(indicators)

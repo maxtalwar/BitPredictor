@@ -3,7 +3,8 @@ import dataScrape as d
 import regression
 from analysis import append_list_as_row
 from time import sleep
-#import emailClient as email
+import csv
+import pandas as pd
 
 # Logs into Robinhood
 login = r.login(username="maxnmtalwar@gmail.com",

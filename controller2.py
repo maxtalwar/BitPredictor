@@ -4,7 +4,8 @@ import analysis as a
 import robin_stocks as r
 from time import sleep
 from datetime import datetime
-#import pync
+import pync
+import turicreate as tc
 
 steps = int(input("How many cycles? "))
 
@@ -47,12 +48,10 @@ diff = 0
 
 suspended = False
 
-ticker = "BCH"
-
 print('\n')
 
 def cycle(step, oldPrice, purchasePrice, appreciation, steps, time, amount, oldIndicators):
-    global owned, correct, total, holdings, diff, halfway, suspended, ticker
+    global owned, correct, total, holdings, diff, halfway, suspended
 
     
     if (step > 0):
@@ -60,29 +59,19 @@ def cycle(step, oldPrice, purchasePrice, appreciation, steps, time, amount, oldI
             suspension = True
             print("Suspended")
         
-        headers = ["RSI","MACD","MA","EMA", "TIME","CHANGE"]
+        headers = ["RSI","MA","EMA", "TIME","CHANGE"]
+
+        indicators = data.dataPointsS()
+
+        indicators.append(10)
+
+        #indicators.append("")
 
         a.append_list_as_row('predict.csv', headers, 'w')
 
-        indicators = data.dataPoints()
+        a.append_list_as_row("predict.csv", indicators, 'a')
 
-        macd = indicators[1]
-
-        if (oldIndicators[1] < macd):
-            results = 1
-        else:
-            results = 0
-
-        placeholder = [indicators[0], results, indicators[2], indicators[3]]
-
-        a.store_csv_indicators(placeholder, time, 'predict.csv')
-
-        print("Predict data set up")
-
-        print("Current RSI: " + str(indicators[0]))
-        print("Current MACD: " + str(indicators[1]))
-        print("Current MA: " + str(indicators[2]))
-        print("Current EMA: " + str(indicators[3]))
+        a.showIndicators(indicators)
 
         price = data.price()
         print("Current price of BCH: $" + str(price))
@@ -102,22 +91,25 @@ def cycle(step, oldPrice, purchasePrice, appreciation, steps, time, amount, oldI
             print("Return on previous purchase: " + str(diff) + "%")
             print("HOLDINGS: " + str(holdings))
         
-        prediction = a.stratAI()
+        prediction = a.strat(indicators)
 
         print("Predicted asset appreciation: " + str(prediction))
         
         if (diff > 1):
-            r.order_sell_crypto_by_price(ticker, amountInAsset, timeInForce='gtc')
+            #r.order_sell_crypto_by_price('BCH', amount, timeInForce='gtc')
             print("Sold asset (Taking gains)")
+            pync.notify('Sold asset (Taking gains)', title='BitTrader')
             owned = False
         elif (prediction == True and not owned and not suspended):
-            r.order_buy_crypto_by_quantity(ticker, amountInAsset)
+            #r.order_buy_crypto_by_quantity("BCH", amountInAsset)
             print("Bought asset")
+            pync.notify('Bought Asset', title='BitTrader')
             owned = True
             purchasePrice = price
         elif (prediction == False and owned and not suspended):
-            r.order_sell_crypto_by_quantity(ticker, amountInAsset)
+            #r.order_sell_crypto_by_quantity('BCH', amountInAsset)
             print("Sold asset")
+            pync.notify('Sold Asset', title='BitTrader')
             owned = False
         else:
             if (not owned):
@@ -144,7 +136,7 @@ if owned:
     r.order_sell_crypto_by_quantity('BCH', amountInAsset, timeInForce='gtc')
     print("Closing out - sold assets")
 
-#pync.notify('Program complete', title='BitTrader')
+pync.notify('Program complete', title='BitTrader')
 
 # Notes:
 # if the EMA is more than the MA and the MA has begun to trend upwards, it 
