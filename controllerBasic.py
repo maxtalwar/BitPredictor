@@ -15,11 +15,9 @@ for i in range (10):
     current_time = now.strftime("%H:%M:%S")
     print("Current Time =", current_time)
 
-    headers = ["RSI","MA","EMA", "TIME","CHANGE"]
+    headers = a.setHeaders()
 
     indicators = data.dataPoints()
-
-    indicators.append(10)
 
     a.append_list_as_row('predict.csv', headers, 'w')
 
@@ -30,24 +28,25 @@ for i in range (10):
     predict = a.strat(indicators)
 
     price = data.price()
-
-    if (owned and predict != True):
+    
+    if (predict == True and not owned):
+        purchasePrice = price
+        owned = True
+        data.buy("BCH", amountInAsset)
+    
+    elif (predict == True and owned):
         if (((price - purchasePrice) / purchasePrice)*100 >= .75):
             owned = False
             data.sell('BCH', amountInAsset)
             print("Sold Asset (Taking gains)")
-
-    elif (predict == True and not owned):
-        purchasePrice = price
-        owned = True
-        data.buy("BCH", amountInAsset)
     
     elif (predict == False and owned):
         owned = False
         data.sell('BCH', amountInAsset)
     
     elif (predict == "HOLD"):
-        print("Held")
+        owned = False
+        data.sell('BCH', amountInAsset)
     else:
         if (owned):
             print("No action taken: already owned")

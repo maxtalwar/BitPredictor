@@ -5,12 +5,13 @@ from regression import predict
 from csv import *
 from time import sleep
 from datetime import datetime
-
+import emailClient as email
 
 def test(limit, time, startingHoldings):
     global total, correct, p, oldPrice, i, holdings, actions
 
-    print(str(i+1) + ":" + str(limit))
+    if (i < limit+1):
+        print(str(i) + ":" + str(limit))
     # prints current time
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
@@ -24,7 +25,7 @@ def test(limit, time, startingHoldings):
         sleep(120)
         test(limit, time, startingHoldings)
 
-    if (i > 0):
+    if (i > 1):
         print("Old Price: " + str(oldPrice))
         print("New Price: " + str(price))
         print("Previous Action: " + str(p))
@@ -44,15 +45,13 @@ def test(limit, time, startingHoldings):
             diff *= 100
             print("Appreciation " + str(diff) + "%")
 
-    if (i < limit-1):
+    if (i < limit+1):
 
-        headers = ["RSI","MA","EMA", "TIME","CHANGE"]
+        headers = a.setHeaders()
 
         indicators = d.dataPoints()
 
-        indicators.append(float(time))
-
-        #indicators.append("")
+        indicators.append("")
 
         a.showIndicators(indicators)
 
@@ -70,22 +69,19 @@ def test(limit, time, startingHoldings):
         if (p == False):
             print("Sold")
             actions.append(p)
-        if (p == "HOLD"):
-            print("Held")
-            actions.append(p)
 
-            if (indicators[2] < indicators[1]):
+            """if (indicators[2] < indicators[1]):
                 print("The EMA was less than the MA, which fulfills the condition for buying. However the RSI is equal to " + str(indicators[0]) + ", which does not fit the criteria specified ")
             else:
-                print("The EMA was greater than the MA, which fulfills the condition for selling. However, the RSI is equal to " + str(indicators[0]) + ", which does not fit the criteria for selling ")
+                print("The EMA was greater than the MA, which fulfills the condition for selling. However, the RSI is equal to " + str(indicators[0]) + ", which does not fit the criteria for selling ")"""
         
         oldPrice = price
         print('\n')
         
         if (p != "HOLD"):
-            sleep(600)
-        else:
             sleep(time*60)
+        else:
+            sleep(120)
         i += 1
 
         sleep(15)
@@ -104,7 +100,7 @@ actions = []
 
 oldPrice = 0
 
-i = 0
+i = 1
 
 limit = int(input("Limit: "))
 
@@ -156,3 +152,6 @@ print(str(startingHoldings) + " with the alg would have turned into: $" + str(ho
 print("You profited $" + str(holdings - startingHoldings) + " over the course of " + str(limit*time) + " minutes")
 
 print(actions)
+
+message = email.createMessage("BitTrader", accuracy)
+email.sendEmail(message)

@@ -1,10 +1,11 @@
 import robin_stocks as r
 import dataScrape as d
 import regression
-from analysis import append_list_as_row
+import analysis as a
 from time import sleep
 import csv
 import pandas as pd
+import emailClient as email
 
 # Logs into Robinhood
 login = r.login(username="maxnmtalwar@gmail.com",
@@ -45,4 +46,13 @@ append_list_as_row("predict.csv", dp, 'a')"""
         print("Current cycle failed")
     sleep(120)"""
 
-print(regression.predict('prices.csv', 'predict.csv'))
+
+"""message = email.createMessage("BitTrader", 3)
+email.sendEmail(message)"""
+
+#sleep(60)
+
+"""dp = d.dataPoints(ticker = 'DOGE')
+a.showIndicators(dp)"""
+
+print(regression.predict())

@@ -1,1 +1,2 @@
-"RSI","MA","EMA"
+RSI,MA,EMA,TIME,CHANGE
+40, -.01, -.02, 10, 1

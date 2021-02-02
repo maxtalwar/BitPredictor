@@ -31,9 +31,4 @@ def sendEmail(message = messageDefault, password = passwordDefault, receiver_ema
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, message)
-    print(email)
     print("Email sent")
-
-"""email = createMessage("TestSubject", 3)
-
-sendEmail(email)"""

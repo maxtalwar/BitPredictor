@@ -15,8 +15,8 @@ def append_list_as_row(file_name, list_of_elem, action):
         csv_writer.writerow(list_of_elem)
     write_obj.close()
 
-def store_csv_indicators(dp, time, file, add=""):
-    dp.append(float(time))
+def store_csv_indicators(dp, file, add=""):
+    #dp.append(str(time))
     dp.append(add)
 
     append_list_as_row(file, dp, 'a')
@@ -79,14 +79,35 @@ def complexStrat(indicators, oldIndicators=[]):
     
     return "HOLD"
 
+def setHeaders():
+    return ["RSI","MA","EMA","MACD", "ULTOSC", "STOCHRSI", "+DI", "-DI", "ROC", "CHANGE"]
+
 def showIndicators(indicators):
-    print("Current RSI: " + str(indicators[0]))
+    headers = setHeaders()
+    headers.remove("CHANGE")
+    for i in range (len(headers)):
+        print(str(headers[i]) + ": " + str(indicators[i]))
 
-    print("Current MA: " + str(indicators[1]))
+    """print("RSI: " + str(indicators[0]))
 
-    print("Current EMA: " + str(indicators[2]))
+    print("MA: " + str(indicators[1]))
+
+    print("EMA: " + str(indicators[2]))
+
+    print("MACD Crossover: " + str(indicators[3]))
+
+
+    print("Ultimate OSC: " + str(indicators[4]))
+
+    print("STOCH RSI: " + str(indicators[5]))"""
+
+def macdCrossover(macd, oldMacd):
+    if (crossover(oldMacd, macd)):
+        return True
+    if (crossover(macd, oldMacd)):
+        return False
     
-    
+    return "HOLD"
 
 """def findSell(indicators, oldIndicators):
     rsi = indicators[0]
@@ -95,7 +116,6 @@ def showIndicators(indicators):
     ema = indicators[3]
 
     if (rsi > 65 and ma > ):"""
-        
     
 def stratAI():
     return (predict() == 1)
@@ -103,3 +123,7 @@ def stratAI():
 # This is used so that I only need to change the code in one place when I change the strategy.
 def strat(indicators):
     return stratAI()
+
+def test(varOne = '1', varTwo = '2'):
+    print(varOne)
+    print(varTwo)
