@@ -19,16 +19,13 @@ def train(steps, dp, oldPrice, step, minutes, ticker):
         if (not failed and step > 0):
             print("Indicators from previous cycle: ")
             a.showIndicators(dp)
-            diff = price - oldPrice
-            appreciation = diff / oldPrice
-            appreciation *= 100
-            appreciation = round(appreciation, 4)
+            appreciation = round(a.percentDiff(price, oldPrice), 4)
 
             print("Old Price " + str(oldPrice))
             print("Current Price: " + str(price))
             print("Total return: " + str(appreciation) + "%")
 
-            if (appreciation > .05 or appreciation < -.05):
+            if (appreciation > .025 or appreciation < -.025):
                 if (appreciation > 0):
                     appreciation = 1
                 else:
@@ -38,17 +35,14 @@ def train(steps, dp, oldPrice, step, minutes, ticker):
                 print("Updated dataset")
             else:
                 print("Filtered out noise (not significant enough change)")
-        
-        dp = data.dataPoints(ticker)
-        failed = False
-        
-        
-        if (not failed):
+        if (step < steps + 1):
+            dp = data.dataPoints(ticker)
+            
             oldPrice = price
 
-        print('\n')
-        sleep(60*minutes)
-        train(steps, dp, oldPrice, step+1, minutes, ticker)
+            print('\n')
+            sleep(60*minutes)
+            train(steps, dp, oldPrice, step+1, minutes, ticker)
     return steps
 
 steps = int(input('Steps? '))
@@ -59,6 +53,6 @@ ticker = 'BTC'
 
 failed = False
 
-sleep(20)
+sleep(120)
 
 train(steps, [], 0, 0, minutes, ticker)

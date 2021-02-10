@@ -1,0 +1,19 @@
+[sframe]
+version=0
+num_segments=0
+num_columns=6
+nrows=25
+[column_names]
+0000=Iteration
+0001=Elapsed Time
+0002=Training Accuracy
+0003=Validation Accuracy
+0004=Training Log Loss
+0005=Validation Log Loss
+[column_files]
+0000=m_23375ce6eef15d8f.sidx:0
+0001=m_23375ce6eef15d8f.sidx:1
+0002=m_23375ce6eef15d8f.sidx:2
+0003=m_23375ce6eef15d8f.sidx:3
+0004=m_23375ce6eef15d8f.sidx:4
+0005=m_23375ce6eef15d8f.sidx:5

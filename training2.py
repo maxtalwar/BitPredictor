@@ -1,32 +1,32 @@
-import dataScrape as data
+import dataScrape as d
 import analysis as a
 from time import sleep
-import requests, json
-import robin_stocks as r
-import analysis as a
-from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
-import json
 
-def train(limit, i, oldPrice):
-    if (i < limit+1):
-        price = data.price()
-        if (i > 0):
-            if (price > oldPrice):
-                appreciation = 1
-            else:
-                appreciation = 0
+for i in range (200):
+
+    sleep(300)
+
+    print('\n')
+
+    print(i+1)
+
+    try:
+        data = d.dataPointsTwo(ticker = 'BTC', backTrack = 10)
+    except:
+        print("Datapoint scraping failed")
+        i -= 1
+        sleep(40)
+        continue
+
+    if (data[-1] > data[-2]):
+        data[-2] = 1
+    else:
+        data[-2] = 0
         
-            dp = data.dataPoints(1)
+    data.pop()
 
-            print("Indicators from previous cycle: ")
-            a.showIndicators(dp)
-            diff = price - oldPrice
-            appreciation = diff / oldPrice
-            appreciation *= 100
-            appreciation = round(appreciation, 4)
-            print("Old Price " + str(oldPrice))
-            print("Current Price: " + str(price))
-            print("Total return: " + str(appreciation) + "%")
-                    
+    a.showIndicators(data)
 
-train(int(input("Limit: ")), 0, 0)
+    print("CHANGE: " + str(data[-1]))
+
+    a.store_csv_indicators(data, 'prices.csv')

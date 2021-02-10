@@ -55,4 +55,32 @@ email.sendEmail(message)"""
 """dp = d.dataPoints(ticker = 'DOGE')
 a.showIndicators(dp)"""
 
-print(regression.predict())
+"""ticker = 'BTC'
+
+dp = d.dataPoints(ticker)
+
+print(dp)"""
+
+#print(regression.predict())
+
+"""accuracy = []
+
+precision = []
+
+for i in range(25):
+    results = regression.predict()
+    accuracy.append(results[0])
+    precision.append(results[1])
+
+print("Accuracy: " + str(a.average(accuracy)))
+
+print("Precision: " + str(a.average(precision)))"""
+ticker = 'BTC'
+
+api  = 0
+
+data = d.dataPoints(ticker, 0, api)
+
+api = 1
+
+data = d.dataPoints(ticker, 0, api)

@@ -1,6 +1,5 @@
 from regression import predict
 from csv import *
-import turicreate
 # 5, 2
 # 4, 3
 
@@ -15,12 +14,11 @@ def append_list_as_row(file_name, list_of_elem, action):
         csv_writer.writerow(list_of_elem)
     write_obj.close()
 
-def store_csv_indicators(dp, file, add=""):
-    #dp.append(str(time))
-    dp.append(add)
+def store_csv_indicators(dp, file, add="null"):
+    if (add != "null"):
+        dp.append(add)
 
     append_list_as_row(file, dp, 'a')
-
 
 def crossover(oldOne, newOne):
     if (oldOne <= 0):
@@ -80,26 +78,13 @@ def complexStrat(indicators, oldIndicators=[]):
     return "HOLD"
 
 def setHeaders():
-    return ["RSI","MA","EMA","MACD", "ULTOSC", "STOCHRSI", "+DI", "-DI", "ROC", "CHANGE"]
+    return ["RSI","MA","EMA", "ULTOSC", "STOCHRSI", "+DI", "-DI", "ROC", "PD", "CHANGE"]
 
 def showIndicators(indicators):
     headers = setHeaders()
     headers.remove("CHANGE")
     for i in range (len(headers)):
         print(str(headers[i]) + ": " + str(indicators[i]))
-
-    """print("RSI: " + str(indicators[0]))
-
-    print("MA: " + str(indicators[1]))
-
-    print("EMA: " + str(indicators[2]))
-
-    print("MACD Crossover: " + str(indicators[3]))
-
-
-    print("Ultimate OSC: " + str(indicators[4]))
-
-    print("STOCH RSI: " + str(indicators[5]))"""
 
 def macdCrossover(macd, oldMacd):
     if (crossover(oldMacd, macd)):
@@ -109,13 +94,11 @@ def macdCrossover(macd, oldMacd):
     
     return "HOLD"
 
-"""def findSell(indicators, oldIndicators):
-    rsi = indicators[0]
-    macd = indicators[1]
-    ma = indicators[2]
-    ema = indicators[3]
+def APIkey():
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5sZWFmZXIwNUBnbWFpbC5jb20iLCJpYXQiOjE2MDgwNzc2ODUsImV4cCI6NzkxNTI3NzY4NX0.mtwEhqsNv0E76gXPHtdNn4GHmg8XkQp2S8G988pyA70'
 
-    if (rsi > 65 and ma > ):"""
+def APIKeyTwo():
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0xM3NjMG1yYWlkZUBnbWFpbC5jb20iLCJpYXQiOjE2MTI5MDMxMTMsImV4cCI6NzkyMDEwMzExM30.N-jdpAQtZJsGOJk_R63SiDCso3qHhho8oB3I1qfEuRM'
     
 def stratAI():
     return (predict() == 1)
@@ -127,3 +110,6 @@ def strat(indicators):
 def test(varOne = '1', varTwo = '2'):
     print(varOne)
     print(varTwo)
+
+def average(list):
+    return sum(list) / len(list)

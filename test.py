@@ -18,7 +18,7 @@ def test(limit, time, startingHoldings):
     print("Current Time =", current_time)
 
     try:
-        price = d.price()
+        price = d.price('BTC')
     except:
         print("getting price data failed")
         i += 1
@@ -49,7 +49,7 @@ def test(limit, time, startingHoldings):
 
         headers = a.setHeaders()
 
-        indicators = d.dataPoints()
+        indicators = d.dataPoints('BTC')
 
         indicators.append("")
 
@@ -110,7 +110,7 @@ time = float(input("Time? "))
 
 holdings = startingHoldings
 
-originalPrice = d.price()
+originalPrice = d.price('BTC')
 
 print('\n')
 
@@ -121,6 +121,8 @@ sleep(15)
 print("Starting...")
 
 print('\n')
+
+sleep(60)
 
 accuracy = test(limit, time, startingHoldings)
 
@@ -145,9 +147,9 @@ print("\n")
 
 print("Asset appreciation: " + str(diff) + "%")
 
-print(str(startingHoldings) +  " HODLING would have turned into: $" + str(percent))
+print("$" + str(startingHoldings) +  " HODLING would have turned into: $" + str(percent))
 
-print(str(startingHoldings) + " with the alg would have turned into: $" + str(holdings))
+print("$" + str(startingHoldings) + " with the alg would have turned into: $" + str(holdings))
 
 print("You profited $" + str(holdings - startingHoldings) + " over the course of " + str(limit*time) + " minutes")
 
