@@ -40,14 +40,6 @@ sleep(delay)
 
 a.append_list_as_row('prices.csv', [], 'a')
 
-print("IMPORTANT: IF YOU HAVE NOT ALREADY IMPLEMENTED THIS, THERE IS A MUCH MORE ACCURATE WAY TO MODEL THE PREDICTIONS. ")
-print("THE WAY TO DO THIS IS: create dozens of predictions and store them in a dictionary, with the accuracy of that prediction model as the key and the prediction value as the key's corresponding value. ")
-print("Check the highest accuracy value in the dictionary, and plug that in. You should then take action based on what that corresponding key value is. ")
-print("For example: say you generate 10 predictions. 7 of those predictions say to sell, 3 say to buy. You would think that you are supposed to buy right now. However, that is not the case. Look through the accuracy of every prediction model that you have created")
-print("For the sake of example, lets say the most accurate model was 80 percent accurate and that model (with 80 percent accuracy) predicted that you should buy")
-print("That is the prediction you will want to go for. You can try averaging out all the accuracy values for buy and sell (so average the accuracy of all the models that say buy and the accuracy of all the models that say sell")
-print("I think you get the picture here. This model is very similar to the concept of a random forest. It's a random forest of boosted trees. This will probably take a long time to model and train, so make sure to close out everything you don't need and opimize the program for performance. Also, invest in a better GPU if possible. ")
-
 for i in range (cycles):
     # spaces out the board and shows the current cycle
     print('\n')

@@ -1,8 +1,5 @@
 from regression import predict
 from csv import *
-# 5, 2
-# 4, 3
-
 
 # Function for appending values to a CSV files (from a list)
 def append_list_as_row(file_name, list_of_elem, action):
@@ -40,9 +37,6 @@ def percentDiff(newVal, oldVal):
     diff *= 100
     diff /= oldVal
     return diff
-
-def appreciateRSI(rsi):
-    return (rsi < 65)
 
 # This stragegy does the following:
 # 1. Checks to ensure the RSI is in a valid range
@@ -101,7 +95,23 @@ def APIKeyTwo():
     return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0xM3NjMG1yYWlkZUBnbWFpbC5jb20iLCJpYXQiOjE2MTI5MDMxMTMsImV4cCI6NzkyMDEwMzExM30.N-jdpAQtZJsGOJk_R63SiDCso3qHhho8oB3I1qfEuRM'
     
 def stratAI():
-    return (predict() == 1)
+    accuracy = []
+    predictions = []
+
+    for i in range(25):
+        results = predict()
+        accuracy.append(results[0])
+        predictions.append(results)
+        #print(str(results[0]) + ":" + str(results[1]))
+
+    best = max(accuracy)
+
+    for item in predictions:
+        if (item[0] == best):
+            prediction = item[1]
+
+    return prediction
+    
 
 # This is used so that I only need to change the code in one place when I change the strategy.
 def strat(indicators):
