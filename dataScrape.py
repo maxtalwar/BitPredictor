@@ -390,6 +390,13 @@ def buy(ticker, amountInAsset):
 def sell(ticker, amountInAsset):
     r.order_sell_crypto_by_quantity(ticker, amountInAsset)
     print("Sold")
+
+def login():
+    # Logs into Robinhood
+    r.login(username="maxnmtalwar@gmail.com",
+         password="8#k5uqP9NG@n",
+         expiresIn=86400,
+         by_sms=True)
     
 def dataPoints(ticker='BTC', backTrack=0, API = 0):
     print(ticker)
