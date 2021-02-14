@@ -29,9 +29,6 @@ def increase(newVal, oldVal):
         return True
     return False
 
-def direction(newVal, oldVal):
-    return newVal > oldVal
-
 def percentDiff(newVal, oldVal):
     diff = newVal - oldVal
     diff *= 100
@@ -43,7 +40,7 @@ def percentDiff(newVal, oldVal):
 # 2. Ensures that the asset was not recently in an uptrend (that may be ending)
 # 3. Checks to see if the exponential moving average is more than the moving average
 # Indicators: RSI, MA, EMA
-def complexStrat(indicators, oldIndicators=[]):
+def complexStrat(indicators):
     rsi = indicators[0]
     ma = indicators[1]
     ema = indicators[2]
@@ -102,9 +99,11 @@ def stratAI():
         results = predict()
         accuracy.append(results[0])
         predictions.append(results)
-        #print(str(results[0]) + ":" + str(results[1]))
+        print(str(results[0]) + ":" + str(results[1]))
 
     best = max(accuracy)
+
+    print(best)
 
     for item in predictions:
         if (item[0] == best):

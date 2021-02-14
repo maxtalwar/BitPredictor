@@ -91,9 +91,22 @@ for item in predictions:
 print(prediction)
 print(best)"""
 
-prediction = a.stratAI()
+correct = 0
 
-print(prediction)
+total = 0
+
+for i in range(10):
+    prediction = a.stratAI()
+    print(prediction)
+    if (prediction == 1):
+        correct += 1
+    total += 1
+    print('\n')
+
+print(correct)
+print(total)
+
+print(100*correct / total)
 
 """
 averageAccuracy = a.average(accuracy)*100
