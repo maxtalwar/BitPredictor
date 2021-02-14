@@ -13,18 +13,14 @@ Subject: Hi there
 It looks like you haven't specified an email, so a default was sent
 as confirmation that your code works"""
 
-def createMessage(subject, body):
+def createMessage(body):
     message = """\
     Subject: BitTrader
-
 
     Program accuracy: %s
     """
     message = message % (str(body))
     return message
-
-
-
 
 def sendEmail(message = messageDefault, password = passwordDefault, receiver_email=receiver_emailDefault):
     context = ssl.create_default_context()
