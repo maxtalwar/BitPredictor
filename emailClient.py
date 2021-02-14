@@ -17,7 +17,7 @@ def createMessage(body):
     message = """\
     Subject: BitTrader
 
-    Program accuracy: %s
+    %s
     """
     message = message % (str(body))
     return message

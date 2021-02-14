@@ -99,11 +99,11 @@ def stratAI():
         results = predict()
         accuracy.append(results[0])
         predictions.append(results)
-        print(str(results[0]) + ":" + str(results[1]))
+        #print(str(results[0]) + ":" + str(results[1]))
 
     best = max(accuracy)
 
-    print(best)
+    #print(best)
 
     for item in predictions:
         if (item[0] == best):

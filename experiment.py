@@ -98,7 +98,7 @@ total = 0
 for i in range(10):
     prediction = a.stratAI()
     print(prediction)
-    if (prediction == 1):
+    if (prediction == 0):
         correct += 1
     total += 1
     print('\n')

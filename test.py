@@ -49,7 +49,12 @@ def test(limit, time, startingHoldings):
 
         headers = a.setHeaders()
 
-        indicators = d.dataPoints('BTC')
+        try:
+            indicators = d.dataPoints('BTC', API = 0)
+        except:
+            indicators = d.dataPoints('BTC', API = 1)
+        
+        indicators.pop()
 
         indicators.append("")
 
@@ -69,11 +74,6 @@ def test(limit, time, startingHoldings):
         if (p == False):
             print("Sold")
             actions.append(p)
-
-            """if (indicators[2] < indicators[1]):
-                print("The EMA was less than the MA, which fulfills the condition for buying. However the RSI is equal to " + str(indicators[0]) + ", which does not fit the criteria specified ")
-            else:
-                print("The EMA was greater than the MA, which fulfills the condition for selling. However, the RSI is equal to " + str(indicators[0]) + ", which does not fit the criteria for selling ")"""
         
         oldPrice = price
         print('\n')
@@ -155,5 +155,5 @@ print("You profited $" + str(holdings - startingHoldings) + " over the course of
 
 print(actions)
 
-message = email.createMessage("BitTrader", accuracy)
+message = email.createMessage("BitTrader", "Program Accuracy: " + str(accuracy))
 email.sendEmail(message)
