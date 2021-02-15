@@ -103,7 +103,7 @@ def stratAI():
 
     best = max(accuracy)
 
-    #print(best)
+    print(best)
 
     for item in predictions:
         if (item[0] == best):

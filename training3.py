@@ -26,7 +26,7 @@ else:
     argsDict['delay'] = 0
 
 if ('-ticker' in args):
-    argsDict['ticker'] = int(args[args.index('-ticker') + 1])
+    argsDict['ticker'] = str(args[args.index('-ticker') + 1])
 else:
     ticker = 'BTC'
 

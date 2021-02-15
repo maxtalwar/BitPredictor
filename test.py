@@ -155,5 +155,5 @@ print("You profited $" + str(holdings - startingHoldings) + " over the course of
 
 print(actions)
 
-message = email.createMessage("BitTrader", "Program Accuracy: " + str(accuracy))
+message = email.createMessage("Program Accuracy: " + str(accuracy))
 email.sendEmail(message)
