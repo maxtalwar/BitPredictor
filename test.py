@@ -66,7 +66,7 @@ def test(limit, time, startingHoldings):
 
         a.append_list_as_row("predict.csv", indicators, 'a')
 
-        p = a.strat(indicators)
+        p = a.strat(indicators, verbose = False)
 
         if (p == True):
             print("Bought")

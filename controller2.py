@@ -91,7 +91,7 @@ def cycle(step, oldPrice, purchasePrice, appreciation, steps, time, amount, oldI
             print("Return on previous purchase: " + str(diff) + "%")
             print("HOLDINGS: " + str(holdings))
         
-        prediction = a.strat(indicators)
+        prediction = a.strat(indicators, verbose = False)
 
         print("Predicted asset appreciation: " + str(prediction))
         

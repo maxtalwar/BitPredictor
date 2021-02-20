@@ -84,5 +84,10 @@ for i in range (cycles):
     # shows how the asset performed based on the change
     print("CHANGE: " + str(data[-1]))
 
-    # stores the data
-    a.store_csv_indicators(data, 'prices.csv')
+    # filters and then stores the data
+    if (data[0] > 65 and data[-1] == 1):
+        print("Filtered out outlier (high RSI and profit)")
+    elif (data[0] < 30 and data[-1] == 0):
+        print("Filtered out outlier (low RSI and negative change)")
+    else:
+        a.store_csv_indicators(data, 'prices.csv')

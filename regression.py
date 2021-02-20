@@ -20,6 +20,8 @@ def predict (train = 'prices.csv', predict ='predict.csv', features = []):
     else:
         f = a.setHeaders()
         f.remove("CHANGE")
+        f.remove('MA')
+        f.remove('EMA')
 
     # Selects the best model based on your data.
     # boosted_trees_classifier seems to be the best type of regression for this data

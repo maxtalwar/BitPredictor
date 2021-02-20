@@ -91,30 +91,27 @@ def APIkey():
 def APIKeyTwo():
     return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0xM3NjMG1yYWlkZUBnbWFpbC5jb20iLCJpYXQiOjE2MTI5MDMxMTMsImV4cCI6NzkyMDEwMzExM30.N-jdpAQtZJsGOJk_R63SiDCso3qHhho8oB3I1qfEuRM'
     
-def stratAI():
-    accuracy = []
-    predictions = []
+def stratAI(verbose = True):
+    best = 0
+    prediction = 0
 
-    for i in range(25):
+    for i in range(20):
         results = predict()
-        accuracy.append(results[0])
-        predictions.append(results)
-        #print(str(results[0]) + ":" + str(results[1]))
+        if (results[0] > best):
+            best = results[0]
+            prediction = results[1]
+        if (verbose):
+            print(results[0])
+    print(str(results[0]) + ":" + str(results[1]))
 
-    best = max(accuracy)
-
-    print(best)
-
-    for item in predictions:
-        if (item[0] == best):
-            prediction = item[1]
+    print("Current model accuracy: " + str(best*100) + "%")
 
     return prediction
     
 
 # This is used so that I only need to change the code in one place when I change the strategy.
-def strat(indicators):
-    return stratAI()
+def strat(indicators, verbose = False):
+    return stratAI(verbose)
 
 def test(varOne = '1', varTwo = '2'):
     print(varOne)
