@@ -12,6 +12,7 @@ def test(limit, time, startingHoldings):
 
     if (i < limit+1):
         print(str(i) + ":" + str(limit))
+    
     # prints current time
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")

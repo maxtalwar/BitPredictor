@@ -72,30 +72,30 @@ print("For the sake of example, lets say the most accurate model was 80 percent 
 print("That is the prediction you will want to go for. You can try averaging out all the accuracy values for buy and sell (so average the accuracy of all the models that say buy and the accuracy of all the models that say sell")
 print("I think you get the picture here. This model is very similar to the concept of a random forest. It's a random forest of boosted trees. This will probably take a long time to model and train, so make sure to close out everything you don't need and opimize the program for performance. Also, invest in a better GPU if possible. You currently have a 1660 ti, which is efficient but fairly slow. ")"""
 
-"""predictions = []
+predictions = []
 
 accuracy = []
 
-for i in range(25):
+for i in range(50):
     results = regression.predict()
-    accuracy.append(results[0])
+    accuracy.append(results[1])
     predictions.append(results)
-    print(str(results[0]) + ":" + str(results[1]))
+    print(str(results[1]) + ":" + str(results[0]))
 
 best = max(accuracy)
 
 for item in predictions:
-    if (item[0] == best):
+    if (item[1] == best):
         prediction = item[1]
 
 print(prediction)
-print(best)"""
+print(best)
 
 correct = 0
 
 total = 0
 
-# generates predictions and compares them to the target value - generates a percentage score based on the predictions
+"""# generates predictions and compares them to the target value - generates a percentage score based on the predictions
 for i in range(20):
     prediction = a.stratAI()[0]
     print(prediction)
@@ -107,9 +107,9 @@ for i in range(20):
 print(correct)
 print(total)
 
-print(100*correct / total)
+print(100*correct / total)"""
 
-"""
+
 averageAccuracy = a.average(accuracy)*100
 
 minAccuracy = min(accuracy)*100
@@ -140,4 +140,4 @@ print('\n')
 print("Bad signs: ")
 
 if (minAccuracy < 50):
-    print("The lowest accuracy was less than 50%, which is an indicator that the bot may lose money in some cases")"""
+    print("The lowest accuracy was less than 50%, which is an indicator that the bot may lose money in some cases")

@@ -13,15 +13,13 @@ def predict (train = 'prices.csv', predict ='predict.csv', features = []):
 
     #train_data = tc.SFrame.read_csv(train, header=True, verbose = False)
 
-    # 'RSI',  'MA', 'EMA', 'ULTOSC', 'STOCHRSI', '+DI', '-DI', 'ROC', 'ADX', 'PD', 'CHANGE'
+    # 'RSI', 'ULTOSC', 'STOCHRSI', '+DI', '-DI', 'ROC', 'PD', 'CHANGE'
 
     if (len(features) > 0):
         f = features
     else:
         f = a.setHeaders()
         f.remove("CHANGE")
-        f.remove('MA')
-        f.remove('EMA')
 
     # Selects the best model based on your data.
     # boosted_trees_classifier seems to be the best type of regression for this data

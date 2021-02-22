@@ -86,7 +86,7 @@ for i in range (cycles):
 
     # filters and then stores the data
     if (data[0] > 65 and data[-1] == 1):
-        print("Filtered out outlier (high RSI and profit)")
+        print("Filtered out outlier (high RSI and gain)")
     elif (data[0] < 30 and data[-1] == 0):
         print("Filtered out outlier (low RSI and negative change)")
     else:

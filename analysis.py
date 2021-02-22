@@ -17,18 +17,6 @@ def store_csv_indicators(dp, file, add="null"):
 
     append_list_as_row(file, dp, 'a')
 
-def crossover(oldOne, newOne):
-    if (oldOne <= 0):
-        if (newOne > 0):
-            return True
-
-    return False
-
-def increase(newVal, oldVal):
-    if ((newVal > oldVal) and newVal > 0):
-        return True
-    return False
-
 def percentDiff(newVal, oldVal):
     diff = newVal - oldVal
     diff *= 100
@@ -65,25 +53,16 @@ def complexStrat(indicators):
     if (ma > 0 and ema > 0 and rsi < 35):
         return True
     
-    
     return "HOLD"
 
 def setHeaders():
-    return ["RSI","MA","EMA", "ULTOSC", "STOCHRSI", "+DI", "-DI", "ROC", "PD", "CHANGE"]
+    return ["RSI", "ULTOSC", "STOCHRSI", "+DI", "-DI", "ROC", "PD", "CHANGE"]
 
 def showIndicators(indicators):
     headers = setHeaders()
     headers.remove("CHANGE")
     for i in range (len(headers)):
         print(str(headers[i]) + ": " + str(indicators[i]))
-
-def macdCrossover(macd, oldMacd):
-    if (crossover(oldMacd, macd)):
-        return True
-    if (crossover(macd, oldMacd)):
-        return False
-    
-    return "HOLD"
 
 def APIkey():
     return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5sZWFmZXIwNUBnbWFpbC5jb20iLCJpYXQiOjE2MDgwNzc2ODUsImV4cCI6NzkxNTI3NzY4NX0.mtwEhqsNv0E76gXPHtdNn4GHmg8XkQp2S8G988pyA70'
@@ -108,15 +87,10 @@ def stratAI(verbose = True):
     print("Current model accuracy: " + str(best*100) + "%")
 
     return [prediction, best]
-    
 
 # This is used so that I only need to change the code in one place when I change the strategy.
 def strat(indicators, verbose = False):
     return stratAI(verbose)
-
-def test(varOne = '1', varTwo = '2'):
-    print(varOne)
-    print(varTwo)
 
 def average(list):
     return sum(list) / len(list)
