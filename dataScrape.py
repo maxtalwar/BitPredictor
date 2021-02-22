@@ -388,18 +388,14 @@ def sell(ticker, amountInAsset):
 def login():
     # Logs into Robinhood
     r.login(username="maxnmtalwar@gmail.com",
-         password="8#k5uqP9NG@n",
+         password="LJ&6Tcu4H#TH",
          expiresIn=86400,
          by_sms=True)
     
 def dataPoints(ticker='BTC', backTrack=0, API = 0):
-    print(ticker)
-    ma = round(a.percentDiff(MA(ticker), price(ticker)), 4)
-    ema = round(a.percentDiff(EMA(ticker), price(ticker)), 4)
+    print("Ticker: " + ticker)
     return [RSI(ticker, backtrack = backTrack, api = API), ultOSC(ticker, backtrack = backTrack, api = API), stochRSI(ticker, backtrack = backTrack, api = API), DMI(ticker, val = 'plusdi', backtrack = backTrack, api = API), DMI(ticker, val = 'minusdi', backtrack = backTrack, api = API), ROC(ticker), direction(ticker, backtrack = backTrack, api = API), price(ticker)]
 
 def dataPointsTwo(ticker='BTC', backTrack=10):
     print(ticker)
-    ma = round(a.percentDiff(MA(ticker, backTrack), priceTwo(ticker, backTrack)), 4)
-    ema = round(a.percentDiff(EMA(ticker, backTrack), priceTwo(ticker, backTrack)), 4)
     return [RSI(ticker, backTrack), ultOSC(ticker, backTrack), stochRSI(ticker, backTrack), DMI(ticker, 'plusdi', backTrack), DMI(ticker, 'minusdi', backTrack), ROC(ticker, backTrack), ADX(ticker, backTrack), direction(ticker, backTrack), priceTwo(ticker, backTrack), priceTwo(ticker, 0)]
