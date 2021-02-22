@@ -4,8 +4,6 @@ from time import sleep
 import robin_stocks as r
 from datetime import datetime
 
-sleep(30)
-
 # defines starting variables
 
 data.login()
@@ -20,8 +18,12 @@ api = 0
 
 headers = a.setHeaders()
 
+cycles = int(input("How many cycles? "))
+
+sleep(30)
+
 # iterates a certain amount of times
-for i in range (int(input("How many cycles? "))):
+for i in range (cycles):
 	print('\n')
 
 	# displays the time

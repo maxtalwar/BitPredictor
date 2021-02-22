@@ -82,9 +82,8 @@ def stratAI(verbose = True):
             prediction = results[0]
         if (verbose):
             print(results[1])
-    print(str(results[1]) + ":" + str(results[0]))
 
-    print("Current model accuracy: " + str(best*100) + "%")
+    print("Model accuracy: " + str(best*100) + "%")
 
     return [prediction, best]
 

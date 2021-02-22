@@ -4,6 +4,8 @@ from time import sleep
 import sys
 import robin_stocks as r
 
+d.login()
+
 # Definte the arguments
 args = sys.argv
 argsDict = {}
