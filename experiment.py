@@ -145,4 +145,4 @@ print(100*correct / total)"""
 
 d.login()
 
-print (d.pwd())
+print(d.price("BTC"))

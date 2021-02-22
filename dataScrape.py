@@ -7,7 +7,7 @@ import os
 
 # note: this seems unchangable, but the API provides data for the "close" -- the default in Binance's chart is set to "open", so you will see a discripancy unless you adjust the settings on the chart
 
-def pwd():
+def getPwd():
     return os.environ['RH_PWD']
 
 def RSI(ticker='BTC', backtrack=0, api = 0):
@@ -391,7 +391,7 @@ def sell(ticker, amountInAsset):
 
 def login():
     # Logs into Robinhood
-    pwd = pwd()
+    pwd = getPwd()
     r.login(username="maxnmtalwar@gmail.com",
          password=pwd,
          expiresIn=86400,
