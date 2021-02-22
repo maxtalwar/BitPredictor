@@ -72,7 +72,7 @@ print("For the sake of example, lets say the most accurate model was 80 percent 
 print("That is the prediction you will want to go for. You can try averaging out all the accuracy values for buy and sell (so average the accuracy of all the models that say buy and the accuracy of all the models that say sell")
 print("I think you get the picture here. This model is very similar to the concept of a random forest. It's a random forest of boosted trees. This will probably take a long time to model and train, so make sure to close out everything you don't need and opimize the program for performance. Also, invest in a better GPU if possible. You currently have a 1660 ti, which is efficient but fairly slow. ")"""
 
-predictions = []
+"""predictions = []
 
 accuracy = []
 
@@ -90,25 +90,6 @@ for item in predictions:
 
 print(prediction)
 print(best)
-
-correct = 0
-
-total = 0
-
-"""# generates predictions and compares them to the target value - generates a percentage score based on the predictions
-for i in range(20):
-    prediction = a.stratAI()[0]
-    print(prediction)
-    if (prediction == 0):
-        correct += 1
-    total += 1
-    print('\n')
-
-print(correct)
-print(total)
-
-print(100*correct / total)"""
-
 
 averageAccuracy = a.average(accuracy)*100
 
@@ -141,3 +122,23 @@ print("Bad signs: ")
 
 if (minAccuracy < 50):
     print("The lowest accuracy was less than 50%, which is an indicator that the bot may lose money in some cases")
+
+"""
+
+correct = 0
+
+total = 0
+
+# generates predictions and compares them to the target value - generates a percentage score based on the predictions
+for i in range(20):
+    prediction = a.stratAI()[0]
+    print(prediction)
+    if (prediction == 0):
+        correct += 1
+    total += 1
+    print('\n')
+
+print(correct)
+print(total)
+
+print(100*correct / total)
