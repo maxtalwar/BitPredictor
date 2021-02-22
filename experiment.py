@@ -123,7 +123,7 @@ print("Bad signs: ")
 if (minAccuracy < 50):
     print("The lowest accuracy was less than 50%, which is an indicator that the bot may lose money in some cases")
 
-"""
+
 
 correct = 0
 
@@ -141,4 +141,8 @@ for i in range(20):
 print(correct)
 print(total)
 
-print(100*correct / total)
+print(100*correct / total)"""
+
+d.login()
+
+print (d.pwd())
