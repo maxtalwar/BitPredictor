@@ -97,7 +97,7 @@ total = 0
 
 # generates predictions and compares them to the target value - generates a percentage score based on the predictions
 for i in range(20):
-    prediction = a.stratAI()
+    prediction = a.stratAI()[0]
     print(prediction)
     if (prediction == 0):
         correct += 1
