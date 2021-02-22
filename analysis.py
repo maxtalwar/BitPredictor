@@ -96,17 +96,18 @@ def stratAI(verbose = True):
     prediction = 0
 
     for i in range(20):
+        # results[0] is the predicted value, results[1] is the accuracy of that model
         results = predict()
-        if (results[0] > best):
-            best = results[0]
-            prediction = results[1]
+        if (results[1] > best):
+            best = results[1]
+            prediction = results[0]
         if (verbose):
-            print(results[0])
-    print(str(results[0]) + ":" + str(results[1]))
+            print(results[1])
+    print(str(results[1]) + ":" + str(results[0]))
 
     print("Current model accuracy: " + str(best*100) + "%")
 
-    return prediction
+    return [prediction, best]
     
 
 # This is used so that I only need to change the code in one place when I change the strategy.

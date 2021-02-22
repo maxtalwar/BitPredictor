@@ -39,7 +39,7 @@ def predict (train = 'prices.csv', predict ='predict.csv', features = []):
 
     results = model.evaluate(test_data)['accuracy']
 
-    info = [results, predictions[0]]
+    info = [predictions[0], results]
 
     # Save the data for future use
     #model.save('classifier.model')
