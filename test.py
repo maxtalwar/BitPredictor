@@ -21,10 +21,8 @@ def test(limit, time, startingHoldings):
     try:
         price = d.price('BTC')
     except:
-        print("getting price data failed")
-        i += 1
-        sleep(120)
-        test(limit, time, startingHoldings)
+        d.login()
+        price = d.price('BTC')
 
     if (i > 1):
         print("Old Price: " + str(oldPrice))

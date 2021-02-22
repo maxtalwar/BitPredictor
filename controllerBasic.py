@@ -10,7 +10,6 @@ sleep(15)
 
 ticker = "BTC"
 
-
 amountInAsset = round(30/data.price(ticker), 5)
 
 api = 0
@@ -27,12 +26,12 @@ for i in range (10):
 	except:
 		print("Datapoint scraping failed - redirecting api")
 	
-	if (api == 1):
-		api = 0
-	else:
-		api = 1
+		if (api == 1):
+			api = 0
+		else:
+			api = 1
 	
-	indicators = data.dataPoints(ticker, 0, api)
+		indicators = data.dataPoints(ticker, 0, api)
 
 	a.append_list_as_row('predict.csv', headers, 'w')
 
@@ -44,7 +43,11 @@ for i in range (10):
 
 	predict = model[0]
 
-	price = data.price()
+	try:
+		price = data.price(ticker)
+	except:
+		data.login()
+		price = data.price(ticker)
 
 	if (predict and not owned):
 		purchasePrice = price

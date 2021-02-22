@@ -4,12 +4,6 @@ import analysis as a
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 
-# Logs into Robinhood
-login = r.login(username="maxnmtalwar@gmail.com",
-         password="8#k5uqP9NG@n",
-         expiresIn=86400,
-         by_sms=True)
-
 # note: this seems unchangable, but the API provides data for the "close" -- the default in Binance's chart is set to "open", so you will see a discripancy unless you adjust the settings on the chart
 
 def RSI(ticker='BTC', backtrack=0, api = 0):
