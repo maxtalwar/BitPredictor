@@ -8,12 +8,6 @@ import pandas as pd
 import emailClient as email
 import statistics as stats
 
-# Logs into Robinhood
-login = r.login(username="maxnmtalwar@gmail.com",
-         password="8#k5uqP9NG@n",
-         expiresIn=86400,
-         by_sms=True)
-
 """amount = int(input("Much much to trade on? "))
 
 print(data.price())
@@ -146,10 +140,15 @@ print(100*correct / total)"""
 ticker = 'BTC'
 d.login()
 
-print(d.price("BTC"))
-
 amountInAsset = round(30/d.price(ticker), 5)
+
+r.order_buy_crypto_by_quantity('BTC', amountInAsset)
+
+"""
+print(d.price(ticker))
+
+
 
 print(amountInAsset)
 
-d.buy(ticker, amountInAsset)
+d.buy(ticker, amountInAsset)"""

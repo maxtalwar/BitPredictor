@@ -55,7 +55,6 @@ for i in range (cycles):
 
 	# creates the model and the prediction
 	model = a.strat(indicators, verbose = False)
-
 	predict = model[0]
 
 	# gets the price
