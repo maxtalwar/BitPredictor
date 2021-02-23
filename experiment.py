@@ -143,6 +143,13 @@ print(total)
 
 print(100*correct / total)"""
 
+ticker = 'BTC'
 d.login()
 
 print(d.price("BTC"))
+
+amountInAsset = round(30/d.price(ticker), 5)
+
+print(amountInAsset)
+
+d.buy(ticker, amountInAsset)

@@ -26,11 +26,7 @@ holdings = amount
 
 startingHoldings = holdings
 
-# Logs into Robinhood
-login = r.login(username="maxnmtalwar@gmail.com",
-         password="8#k5uqP9NG@n",
-         expiresIn=86400,
-         by_sms=True)
+data.login()
 
 print("Logged in")
 

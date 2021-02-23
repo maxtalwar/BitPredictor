@@ -1,4 +1,4 @@
-import dataScrape as data
+import dataScrape as d
 import analysis as a
 from time import sleep
 import robin_stocks as r
@@ -6,13 +6,15 @@ from datetime import datetime
 
 # defines starting variables
 
-data.login()
+d.login()
 
 owned = False
 
 ticker = "BTC"
 
-amountInAsset = round(30/data.price(ticker), 5)
+amountInAsset = round(30/d.price(ticker), 5)
+
+print(amountInAsset)
 
 api = 0
 
@@ -33,7 +35,7 @@ for i in range (cycles):
 
 	# gets the data
 	try:
-		indicators = data.dataPoints(ticker, 0, api)
+		indicators = d.dataPoints(ticker, 0, api)
 	except:
 		print("Datapoint scraping failed - redirecting api")
 	
@@ -42,7 +44,7 @@ for i in range (cycles):
 		else:
 			api = 1
 	
-		indicators = data.dataPoints(ticker, 0, api)
+		indicators = d.dataPoints(ticker, 0, api)
 
 	# adds the predict data to a csv file
 	a.append_list_as_row('predict.csv', headers, 'w')
@@ -58,29 +60,29 @@ for i in range (cycles):
 
 	# gets the price
 	try:
-		price = data.price(ticker)
+		price = d.price(ticker)
 	except:
-		data.login()
-		price = data.price(ticker)
+		d.login()
+		price = d.price(ticker)
 
 	print(predict)
 	# chekcs to see if the bot should buy
 	if (predict and not owned):
 		purchasePrice = price
 		owned = True
-		data.buy(ticker, amountInAsset)
+		d.buy(ticker, amountInAsset)
 
 	# checks to see if the bot should take profits
 	elif (predict and owned):
 		if (((price - purchasePrice) / purchasePrice)*100 >= .75):
 			owned = False
-			data.sell(ticker, amountInAsset)
+			d.sell(ticker, amountInAsset)
 			print("Sold Asset (Taking gains)")
 	
 	# checks to see if the bot should sell
 	elif (not predict and owned):
 		owned = False
-		data.sell(ticker, amountInAsset)
+		d.sell(ticker, amountInAsset)
 
 	sleep(600)
 
