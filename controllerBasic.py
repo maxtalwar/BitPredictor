@@ -99,7 +99,7 @@ for i in range (cycles):
 		margin = a.percentDiff(price, purchasePrice)/100
 		print("Profit: $" + str(margin*amountInUSD))
 
-	sleep(300)
+	sleep(600)
 
 # sells all assets at the end
 if (owned):
