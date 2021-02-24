@@ -66,7 +66,7 @@ print("For the sake of example, lets say the most accurate model was 80 percent 
 print("That is the prediction you will want to go for. You can try averaging out all the accuracy values for buy and sell (so average the accuracy of all the models that say buy and the accuracy of all the models that say sell")
 print("I think you get the picture here. This model is very similar to the concept of a random forest. It's a random forest of boosted trees. This will probably take a long time to model and train, so make sure to close out everything you don't need and opimize the program for performance. Also, invest in a better GPU if possible. You currently have a 1660 ti, which is efficient but fairly slow. ")"""
 
-"""predictions = []
+predictions = []
 
 accuracy = []
 
@@ -118,7 +118,7 @@ if (minAccuracy < 50):
     print("The lowest accuracy was less than 50%, which is an indicator that the bot may lose money in some cases")
 
 
-
+"""
 correct = 0
 
 total = 0
@@ -137,18 +137,18 @@ print(total)
 
 print(100*correct / total)"""
 
+"""r.login(username="nicktalwar",
+         password="8#k5uqP9NG@n",
+         expiresIn=86400,
+         by_sms=True)"""
+
+"""d.login()
+
 ticker = 'BTC'
-d.login()
 
-amountInAsset = round(30/d.price(ticker), 5)
+price = d.price(ticker)
+print(price)
 
-r.order_buy_crypto_by_quantity('BTC', amountInAsset)
-
-"""
-print(d.price(ticker))
-
-
-
-print(amountInAsset)
+amountInAsset = round(30/price, 4)
 
 d.buy(ticker, amountInAsset)"""

@@ -392,14 +392,14 @@ def sell(ticker, amountInAsset):
 def login():
     # Logs into Robinhood
     pwd = getPwd()
-    r.login(username="maxnmtalwar@gmail.com",
+    r.login(username="nicktalwar",
          password=pwd,
          expiresIn=86400,
          by_sms=True)
     
 def dataPoints(ticker='BTC', backTrack=0, API = 0):
     print("Ticker: " + ticker)
-    return [RSI(ticker, backtrack = backTrack, api = API), ultOSC(ticker, backtrack = backTrack, api = API), stochRSI(ticker, backtrack = backTrack, api = API), DMI(ticker, val = 'plusdi', backtrack = backTrack, api = API), DMI(ticker, val = 'minusdi', backtrack = backTrack, api = API), ROC(ticker), direction(ticker, backtrack = backTrack, api = API), price(ticker)]
+    return [RSI(ticker, backtrack = backTrack, api = API), ultOSC(ticker, backtrack = backTrack, api = API), stochRSI(ticker, backtrack = backTrack, api = API), DMI(ticker, val = 'plusdi', backtrack = backTrack, api = API), DMI(ticker, val = 'minusdi', backtrack = backTrack, api = API), ROC(ticker, backtrack = backTrack, api = API), direction(ticker, backtrack = backTrack, api = API), price(ticker)]
 
 def dataPointsTwo(ticker='BTC', backTrack=10):
     print(ticker)

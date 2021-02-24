@@ -4,23 +4,26 @@ from time import sleep
 import robin_stocks as r
 from datetime import datetime
 
-# defines starting variables
-
 d.login()
+
+# defines starting variables
+startingCash = float(input("How much cash in your account? "))
 
 owned = False
 
 ticker = "BTC"
 
-amountInAsset = round(30/d.price(ticker), 5)
-
-print(amountInAsset)
-
 api = 0
 
 headers = a.setHeaders()
 
+amountInUSD = float(input("Trade amount (USD): "))
+
 cycles = int(input("How many cycles? "))
+
+amountInAsset = round(amountInUSD/d.price(ticker), 5)
+
+print("Asset amount traded on: " + str(amountInAsset) + " " + ticker)
 
 sleep(30)
 
@@ -48,7 +51,6 @@ for i in range (cycles):
 
 	# adds the predict data to a csv file
 	a.append_list_as_row('predict.csv', headers, 'w')
-
 	a.append_list_as_row("predict.csv", indicators, 'a')
 
 	a.showIndicators(indicators)
@@ -57,6 +59,11 @@ for i in range (cycles):
 	model = a.strat(indicators, verbose = False)
 	predict = model[0]
 
+	if (predict == 1):
+		print("Predicted action: BUY")
+	else:
+		print("Predicted action: SELL")
+
 	# gets the price
 	try:
 		price = d.price(ticker)
@@ -64,7 +71,10 @@ for i in range (cycles):
 		d.login()
 		price = d.price(ticker)
 
-	print(predict)
+	print("Price: $" + str(price))
+
+	print("Owned: " + str(owned))
+
 	# chekcs to see if the bot should buy
 	if (predict and not owned):
 		purchasePrice = price
@@ -77,18 +87,31 @@ for i in range (cycles):
 			owned = False
 			d.sell(ticker, amountInAsset)
 			print("Sold Asset (Taking gains)")
+			amountInAsset = round(30/d.price(ticker), 5)
+			margin = a.percentDiff(price, purchasePrice)/100
+			print("Profit: $" + str(margin*amountInUSD))
 	
 	# checks to see if the bot should sell
 	elif (not predict and owned):
 		owned = False
 		d.sell(ticker, amountInAsset)
+		amountInAsset = round(30/d.price(ticker), 5)
+		margin = a.percentDiff(price, purchasePrice)
+		print("Profit: $" + str(margin*amountInUSD))
 
-	sleep(600)
+	sleep(300)
 
 # sells all assets at the end
 if (owned):
     r.order_sell_crypto_by_quantity(ticker, amountInAsset)
     print("Sold all assets - closed out")
 
+sleep(180)
 
-print("Complete")
+cash = r.build_user_profile()['cash']
+
+profit = float(cash) - startingCash
+
+print("You profited: $"  + str(profit) + " over the course of " + str(cycles*10) + " minutes")
+
+print("This was an average profit of $" + str(profit * 6 / cycles) + " per hour")
