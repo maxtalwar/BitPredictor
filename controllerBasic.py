@@ -83,11 +83,11 @@ for i in range (cycles):
 
 	# checks to see if the bot should take profits
 	elif (predict and owned):
-		if (((price - purchasePrice) / purchasePrice)*100 >= .75):
+		if (((price - purchasePrice) / purchasePrice)*100 >= 1):
 			owned = False
 			d.sell(ticker, amountInAsset)
 			print("Sold Asset (Taking gains)")
-			amountInAsset = round(30/d.price(ticker), 5)
+			amountInAsset = round(amountInUSD/d.price(ticker), 5)
 			margin = a.percentDiff(price, purchasePrice)/100
 			print("Profit: $" + str(margin*amountInUSD))
 	
@@ -95,8 +95,8 @@ for i in range (cycles):
 	elif (not predict and owned):
 		owned = False
 		d.sell(ticker, amountInAsset)
-		amountInAsset = round(30/d.price(ticker), 5)
-		margin = a.percentDiff(price, purchasePrice)
+		amountInAsset = round(amountInUSD/d.price(ticker), 5)
+		margin = a.percentDiff(price, purchasePrice)/100
 		print("Profit: $" + str(margin*amountInUSD))
 
 	sleep(300)
