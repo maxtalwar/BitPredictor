@@ -15,7 +15,7 @@ ticker = 'BTC'
 if ('-api' in args):
     argsDict['api'] = int(args[args.index('-api') + 1])
 else:
-    argsDict['api'] = int(input("API #: "))
+    argsDict['api'] = 1
 
 if ('-cycles' in args):
     argsDict['cycles'] = int(args[args.index('-cycles') + 1])

@@ -10,8 +10,7 @@ import os
 def getPwd():
     return os.environ['RH_PWD']
 
-def RSI(ticker='BTC', backtrack=0, api = 0):
-
+def RSI(ticker='BTC', backtrack=0, api = 1):
     # Define indicator
     indicator = "rsi"
     
@@ -19,10 +18,7 @@ def RSI(ticker='BTC', backtrack=0, api = 0):
     endpoint = f"https://api.taapi.io/{indicator}"
 
     # get API key
-    if (api == 0):
-        secret = a.APIkey()
-    else:
-        secret = a.APIKeyTwo()
+    secret = a.getAPIKey(api)
     
     # Define a parameters dict for the parameters to be sent to the API 
     parameters = {
@@ -40,15 +36,9 @@ def RSI(ticker='BTC', backtrack=0, api = 0):
     # Extract data in json format 
     result = response.json() 
 
-    # Print result
-    #print(result)
-    try:
-        return round(float(result['value']), 4)
-    except:
-        print(result)
-        return round(float(result['value']), 4)
+    return round(float(result['value']), 4)
 
-def stochRSI(ticker='BTC', backtrack=0, api = 0):
+def stochRSI(ticker='BTC', backtrack=0, api = 1):
     # Define indicator
     indicator = "stochf"
     
@@ -56,10 +46,7 @@ def stochRSI(ticker='BTC', backtrack=0, api = 0):
     endpoint = f"https://api.taapi.io/{indicator}"
 
     # get API key
-    if (api == 0):
-        secret = a.APIkey()
-    else:
-        secret = a.APIKeyTwo()
+    secret = a.getAPIKey(api)
     
     # Define a parameters dict for the parameters to be sent to the API 
     parameters = {
@@ -77,86 +64,10 @@ def stochRSI(ticker='BTC', backtrack=0, api = 0):
     # Extract data in json format 
     result = response.json() 
 
-    #print(result)
-    try:
-        return round(float(result['valueFastK']), 4)
-    except:
-        print(result)
-        return round(float(result['valueFastK']), 4)
-
-def MA(ticker='BTC', backtrack=0, api = 0):
-    # Define indicator
-    indicator = "ma"
-    
-    # Define endpoint 
-    endpoint = f"https://api.taapi.io/{indicator}"
-
-    # get API key
-    if (api == 0):
-        secret = a.APIkey()
-    else:
-        secret = a.APIKeyTwo()
-    
-    # Define a parameters dict for the parameters to be sent to the API 
-    parameters = {
-        'secret': secret,
-        'exchange': 'binance',
-        'symbol': ticker + '/USDT',
-        'interval': '1m',
-        'backtrack':backtrack
-        } 
-    
-    # Send get request and save the response as response object 
-    response = requests.get(url = endpoint, params = parameters)
-    
-    # Extract data in json format 
-    result = response.json() 
-
-    # Print result
-    #print(result)
-    try:
-        return round(float(result['value']), 4)
-    except:
-        print(result)
-        return round(float(result['value']), 4)
-
-def EMA(ticker='BTC', backtrack=0, api = 0):
-    # Define indicator
-    indicator = "ema"
-    
-    # Define endpoint 
-    endpoint = f"https://api.taapi.io/{indicator}"
-
-    # get API key
-    if (api == 0):
-        secret = a.APIkey()
-    else:
-        secret = a.APIKeyTwo()
-    
-    # Define a parameters dict for the parameters to be sent to the API 
-    parameters = {
-        'secret': secret,
-        'exchange': 'binance',
-        'symbol': ticker + '/USDT',
-        'interval': '1m',
-        'backtrack':backtrack
-        } 
-    
-    # Send get request and save the response as response object 
-    response = requests.get(url = endpoint, params = parameters)
-    
-    # Extract data in json format 
-    result = response.json() 
-
-    # Print result
-    try:
-        return round(float(result['value']), 4)
-    except:
-        print(result)
-        return round(float(result['value']), 4)
+    return round(float(result['valueFastK']), 4)
 
 # Average Directional Index
-def ADX(ticker='BTC', backtrack=0, api = 0):
+def ADX(ticker='BTC', backtrack=0, api = 1):
     # Define indicator
     indicator = "adx"
     
@@ -164,10 +75,7 @@ def ADX(ticker='BTC', backtrack=0, api = 0):
     endpoint = f"https://api.taapi.io/{indicator}"
 
     # get API key
-    if (api == 0):
-        secret = a.APIkey()
-    else:
-        secret = a.APIKeyTwo()
+    secret = a.getAPIKey(api)
     
     # Define a parameters dict for the parameters to be sent to the API 
     parameters = {
@@ -184,15 +92,10 @@ def ADX(ticker='BTC', backtrack=0, api = 0):
     # Extract data in json format 
     result = response.json() 
 
-    # Print result
-    try:
-        return round(float(result['value']), 4)
-    except:
-        print(result)
-        return round(float(result['value']), 4)
+    return round(float(result['value']), 4)
 
 # Ultimate Oscillator
-def ultOSC(ticker='BTC', backtrack=0, api = 0):
+def ultOSC(ticker='BTC', backtrack=0, api = 1):
     # Define indicator
     indicator = "ultosc"
     
@@ -200,10 +103,7 @@ def ultOSC(ticker='BTC', backtrack=0, api = 0):
     endpoint = f"https://api.taapi.io/{indicator}"
 
     # get API key
-    if (api == 0):
-        secret = a.APIkey()
-    else:
-        secret = a.APIKeyTwo()
+    secret = a.getAPIKey(api)
     
     # Define a parameters dict for the parameters to be sent to the API 
     parameters = {
@@ -220,15 +120,10 @@ def ultOSC(ticker='BTC', backtrack=0, api = 0):
     # Extract data in json format 
     result = response.json() 
 
-    # Print result
-    try:
-        return round(float(result['value']), 4)
-    except:
-        print(result)
-        return round(float(result['value']), 4)
+    return round(float(result['value']), 4)
 
 # directional movement index
-def DMI(ticker='BTC', val = 'plusdi', backtrack=0, api = 0):
+def DMI(ticker='BTC', val = 'plusdi', backtrack=0, api = 1):
     # Define indicator
     indicator = "dmi"
     
@@ -236,10 +131,7 @@ def DMI(ticker='BTC', val = 'plusdi', backtrack=0, api = 0):
     endpoint = f"https://api.taapi.io/{indicator}"
 
     # get API key
-    if (api == 0):
-        secret = a.APIkey()
-    else:
-        secret = a.APIKeyTwo()
+    secret = a.getAPIKey(api)
     
     # Define a parameters dict for the parameters to be sent to the API 
     parameters = {
@@ -255,17 +147,11 @@ def DMI(ticker='BTC', val = 'plusdi', backtrack=0, api = 0):
     
     # Extract data in json format 
     result = response.json() 
-
-    try:
-    # Print result
-        return round(float(result[val]), 4)
-    except:
-        print(result)
-        return round(float(result[val]), 4)
+    
+    return round(float(result[val]), 4)
 
 # Rate of Change Indicator
-# directional movement index
-def ROC(ticker='BTC', backtrack=0, api=0):
+def ROC(ticker='BTC', backtrack=0, api=1):
     # Define indicator
     indicator = "roc"
     
@@ -273,10 +159,7 @@ def ROC(ticker='BTC', backtrack=0, api=0):
     endpoint = f"https://api.taapi.io/{indicator}"
 
      # get API key
-    if (api == 0):
-        secret = a.APIkey()
-    else:
-        secret = a.APIKeyTwo()
+    secret = a.getAPIKey(api)
     
     # Define a parameters dict for the parameters to be sent to the API 
     parameters = {
@@ -293,61 +176,9 @@ def ROC(ticker='BTC', backtrack=0, api=0):
     # Extract data in json format 
     result = response.json() 
 
-    try:
-        return round(float(result['value']), 4)
-    except:
-        print(result)
-        return round(float(result['value']), 4)
+    return round(float(result['value']), 4)
 
-def price(ticker='BTC'):
-    return float(r.crypto.get_crypto_quote(ticker)['ask_price'])
-
-# gets the average price of the most recent candle
-def priceTwo(ticker = 'BTC', backtrack=0, api= 0):
-    # Define indicator
-    indicator = "typprice"
-    
-    # Define endpoint 
-    endpoint = f"https://api.taapi.io/{indicator}"
-
-    # get API key
-    if (api == 0):
-        secret = a.APIkey()
-    else:
-        secret = a.APIKeyTwo()
-    
-    # Define a parameters dict for the parameters to be sent to the API 
-    parameters = {
-        'secret': secret,
-        'exchange': 'binance',
-        'symbol': ticker + '/USDT',
-        'interval': '1m',
-        'backtrack':backtrack
-        } 
-    
-    # Send get request and save the response as response object 
-    response = requests.get(url = endpoint, params = parameters)
-    
-    # Extract data in json format 
-    result = response.json() 
-
-    try:
-        return round(float(result['value']), 4)
-    except:
-        print(result)
-        return round(float(result['value']), 4)
-
-def priceChange(ticker='BTC', backtrack = 10):
-    prices = [priceTwo(ticker, backtrack), priceTwo(ticker, 0)]
-    oldPrice = prices[0]
-    price = prices[1]
-    print(oldPrice)
-    print(price)
-    if (price > oldPrice):
-        return 1
-    return 0
-
-def direction(ticker='BTC', backtrack = 0, api = 0):
+def direction(ticker='BTC', backtrack = 0, api = 1):
     # Define indicator
     indicator = "pd"
     
@@ -355,10 +186,7 @@ def direction(ticker='BTC', backtrack = 0, api = 0):
     endpoint = f"https://api.taapi.io/{indicator}"
 
     # get API key
-    if (api == 0):
-        secret = a.APIkey()
-    else:
-        secret = a.APIKeyTwo()
+    secret = a.getAPIKey(api)
     
     # Define a parameters dict for the parameters to be sent to the API 
     parameters = {
@@ -375,11 +203,10 @@ def direction(ticker='BTC', backtrack = 0, api = 0):
     # Extract data in json format 
     result = response.json() 
 
-    try:
-        return round(float(result['value']), 4)
-    except:
-        print(result)
-        return round(float(result['value']), 4)
+    return round(float(result['value']), 4)
+
+def price(ticker='BTC'):
+    return float(r.crypto.get_crypto_quote(ticker)['ask_price'])
 
 def buy(ticker, amountInAsset):
     r.order_buy_crypto_by_quantity(ticker, amountInAsset)
@@ -397,8 +224,24 @@ def login():
          expiresIn=86400,
          by_sms=True)
     
-def dataPoints(ticker='BTC', backTrack=0, API = 0):
+def dataPoints(ticker='BTC', backTrack=0, API = 1):
+    success = False
+    while not success:
+        try:
+            success = True
+            data = getData(ticker, backTrack, API)
+        except:
+            success = False
+            if (API == 1):
+                API = 2
+            elif (API == 2):
+                API = 3
+            elif (API == 3):
+                API = 1
     print("Ticker: " + ticker)
+    return data
+
+def getData(ticker='BTC', backTrack=0, API = 1):
     return [RSI(ticker, backtrack = backTrack, api = API), ultOSC(ticker, backtrack = backTrack, api = API), stochRSI(ticker, backtrack = backTrack, api = API), DMI(ticker, val = 'plusdi', backtrack = backTrack, api = API), DMI(ticker, val = 'minusdi', backtrack = backTrack, api = API), ROC(ticker, backtrack = backTrack, api = API), direction(ticker, backtrack = backTrack, api = API), price(ticker)]
 
 def dataPointsTwo(ticker='BTC', backTrack=10):

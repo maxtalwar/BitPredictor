@@ -13,7 +13,7 @@ owned = False
 
 ticker = "BTC"
 
-api = 0
+api = 1
 
 headers = a.setHeaders()
 

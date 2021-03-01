@@ -69,7 +69,19 @@ def APIkey():
 
 def APIKeyTwo():
     return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0xM3NjMG1yYWlkZUBnbWFpbC5jb20iLCJpYXQiOjE2MTI5MDMxMTMsImV4cCI6NzkyMDEwMzExM30.N-jdpAQtZJsGOJk_R63SiDCso3qHhho8oB3I1qfEuRM'
-    
+
+def APIKeyThree():
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhcmswbmNvZGVyQGdtYWlsLmNvbSIsImlhdCI6MTYxNDU2Mzc0NCwiZXhwIjo3OTIxNzYzNzQ0fQ.yHWO1Y3p-NSUWy_N0DwGIiqC9EtjrmB2yYHdz-AWUuQ'
+
+
+def getAPIKey(id):
+    keys = {
+        1:APIkey(),
+        2:APIKeyTwo(),
+        3:APIKeyThree()
+    }
+    return keys[id]
+
 def stratAI(verbose = True):
     best = 0
     prediction = 0
