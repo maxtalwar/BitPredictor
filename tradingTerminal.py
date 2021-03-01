@@ -32,6 +32,8 @@ while not over:
     if (command == "show"):
         data = d.dataPoints(ticker, 0, 1)
         a.showIndicators(data)
+        reccomendation = a.strat(verbose = False)
+        print("Reccomended action: " + str(reccomendation))
     
     if (command == "BUY"):
         #r.order_buy_crypto_by_price(ticker, amountInUSD)

@@ -82,7 +82,23 @@ def getAPIKey(id):
     }
     return keys[id]
 
-def stratAI(verbose = True):
+def stratAI():
+    sell = []
+    buy = []
+
+    for i in range(20):
+        results = predict()
+        if results[0] == 0:
+            sell.append(results[1])
+        else:
+            buy.append(results[1])
+    
+    if (average(sell) > average(buy)):
+        return 0
+    else:
+        return 1
+
+def stratAITwo(verbose = True):
     best = 0
     prediction = 0
 
@@ -95,12 +111,13 @@ def stratAI(verbose = True):
         if (verbose):
             print(results[1])
 
-    print("Model accuracy: " + str(best*100) + "%")
+    if (verbose):
+        print("Model accuracy: " + str(best*100) + "%")
 
-    return [prediction, best]
+    return prediction
 
 # This is used so that I only need to change the code in one place when I change the strategy.
-def strat(indicators, verbose = False):
+def strat(indicators = [], verbose = False):
     return stratAI(verbose)
 
 def average(list):

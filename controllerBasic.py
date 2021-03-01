@@ -49,6 +49,7 @@ for i in range (cycles):
 	
 		indicators = d.dataPoints(ticker, 0, api)
 
+	indicators.pop(-1)
 	# adds the predict data to a csv file
 	a.append_list_as_row('predict.csv', headers, 'w')
 	a.append_list_as_row("predict.csv", indicators, 'a')

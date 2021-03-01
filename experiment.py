@@ -68,22 +68,21 @@ print("For the sake of example, lets say the most accurate model was 80 percent 
 print("That is the prediction you will want to go for. You can try averaging out all the accuracy values for buy and sell (so average the accuracy of all the models that say buy and the accuracy of all the models that say sell")
 print("I think you get the picture here. This model is very similar to the concept of a random forest. It's a random forest of boosted trees. This will probably take a long time to model and train, so make sure to close out everything you don't need and opimize the program for performance. Also, invest in a better GPU if possible. You currently have a 1660 ti, which is efficient but fairly slow. ")"""
 
-
+"""
 predictions = []
 
 accuracy = []
 
-for i in range(50):
+best = 0
+
+for i in range(100):
     results = regression.predict()
     accuracy.append(results[1])
     predictions.append(results)
-    print(str(results[1]) + ":" + str(results[0]))
-
-best = max(accuracy)
-
-for item in predictions:
-    if (item[1] == best):
-        prediction = item[1]
+    #print(str(results[1]) + ":" + str(results[0]))
+    if (results[1] > best):
+        best = results[1]
+        prediction = results[0]
 
 print(prediction)
 print(best)
@@ -100,7 +99,9 @@ print("Lowest Accuracy: " + str(minAccuracy) + "%")
 
 print("Median Accuracy: " + str(medianAccuracy) + "%")
 
-print('\n')
+print('\n')"""
+
+"""
 
 print("Good signs: ")
 
@@ -119,16 +120,16 @@ print("Bad signs: ")
 
 if (minAccuracy < 50):
     print("The lowest accuracy was less than 50%, which is an indicator that the bot may lose money in some cases")
-
-
 """
+
+
 correct = 0
 
 total = 0
 
 # generates predictions and compares them to the target value - generates a percentage score based on the predictions
 for i in range(20):
-    prediction = a.stratAI()[0]
+    prediction = a.stratAITwo()
     print(prediction)
     if (prediction == 0):
         correct += 1
@@ -138,12 +139,7 @@ for i in range(20):
 print(correct)
 print(total)
 
-print(100*correct / total)"""
-
-"""r.login(username="nicktalwar",
-         password="8#k5uqP9NG@n",
-         expiresIn=86400,
-         by_sms=True)"""
+print(100*correct / total)
 
 """d.login()
 
