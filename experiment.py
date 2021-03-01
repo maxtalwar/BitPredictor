@@ -122,7 +122,7 @@ if (minAccuracy < 50):
     print("The lowest accuracy was less than 50%, which is an indicator that the bot may lose money in some cases")
 """
 
-
+"""
 correct = 0
 
 total = 0
@@ -139,7 +139,7 @@ for i in range(20):
 print(correct)
 print(total)
 
-print(100*correct / total)
+print(100*correct / total)"""
 
 """d.login()
 
@@ -151,3 +151,9 @@ print(price)
 amountInAsset = round(30/price, 4)
 
 d.buy(ticker, amountInAsset)"""
+
+ticker = "BTC"
+
+amountInAsset = round(100 / d.price(ticker), 5)
+
+r.order_sell_crypto_by_quantity(ticker, amountInAsset*1)

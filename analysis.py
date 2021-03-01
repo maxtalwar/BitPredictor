@@ -118,7 +118,7 @@ def stratAITwo(verbose = True):
 
 # This is used so that I only need to change the code in one place when I change the strategy.
 def strat(indicators = [], verbose = False):
-    return stratAI(verbose)
+    return stratAI()
 
 def average(list):
     return sum(list) / len(list)

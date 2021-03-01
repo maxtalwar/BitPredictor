@@ -246,4 +246,4 @@ def getData(ticker='BTC', backTrack=0, API = 1):
 
 def dataPointsTwo(ticker='BTC', backTrack=10):
     print(ticker)
-    return [RSI(ticker, backTrack), ultOSC(ticker, backTrack), stochRSI(ticker, backTrack), DMI(ticker, 'plusdi', backTrack), DMI(ticker, 'minusdi', backTrack), ROC(ticker, backTrack), ADX(ticker, backTrack), direction(ticker, backTrack), priceTwo(ticker, backTrack), priceTwo(ticker, 0)]
+    return [RSI(ticker, backTrack), ultOSC(ticker, backTrack), stochRSI(ticker, backTrack), DMI(ticker, 'plusdi', backTrack), DMI(ticker, 'minusdi', backTrack), ROC(ticker, backTrack), ADX(ticker, backTrack), direction(ticker, backTrack)]
