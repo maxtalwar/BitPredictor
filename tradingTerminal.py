@@ -41,8 +41,6 @@ while not over:
             print("Reccomended action: BUY")
         else:
             print("Reccomended action: SELL")
-    if (command == "remind"):
-        sleep(300)
     
     if (command == "BUY"):
         r.order_buy_crypto_by_price(ticker, amountInUSD)
