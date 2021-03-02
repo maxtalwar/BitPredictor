@@ -12,7 +12,7 @@ owned = False
 
 amountInUSD = 100
 
-amountInAsset = round(100 / d.price(ticker), 5)
+amountInAsset = round(amountInUSD / d.price(ticker), 5)
 
 unitsOwned = 0
 
@@ -27,7 +27,8 @@ while not over:
         over = True
     
     if (command == "price"):
-        print(price)
+        print("Price of : $" + str(price))
+
         if (owned):
             profit = (a.percentDiff(price, averagePrice) / 100)* amountInUSD
             print("Profit: $" + str(profit))
@@ -40,13 +41,15 @@ while not over:
             print("Reccomended action: BUY")
         else:
             print("Reccomended action: SELL")
+    if (command == "remind"):
+        sleep(300)
     
     if (command == "BUY"):
         r.order_buy_crypto_by_price(ticker, amountInUSD)
         unitsOwned += 1
         averagePrice += price
         averagePrice /= unitsOwned
-        amountInAsset += amountInUSD / price
+        amountInAsset += round(amountInUSD / price, 5)
         print("Bought at $" + str(price))
         owned = True
 

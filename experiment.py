@@ -154,6 +154,10 @@ d.buy(ticker, amountInAsset)"""
 
 ticker = "BTC"
 
-amountInAsset = round(100 / d.price(ticker), 5)
+unitsOwned = 1
 
-r.order_sell_crypto_by_quantity(ticker, amountInAsset*1)
+amountInUSD = 100
+
+amountInAsset = round(amountInUSD / d.price(ticker), 5)
+
+r.order_sell_crypto_by_quantity(ticker, amountInAsset*unitsOwned)
