@@ -18,6 +18,8 @@ unitsOwned = 0
 
 averagePrice = 0
 
+totalOwned = 0
+
 while not over:
     command = input("Enter command: ")
 
@@ -26,11 +28,18 @@ while not over:
     if (command == "quit"):
         over = True
     
+    if (command == "auto"):
+        reccomendation = a.strat(verbose = False)
+        if (reccomendation == 1):
+            command = "BUY"
+        else:
+            command = "SELL"
+    
     if (command == "price"):
-        print("Price of : $" + str(price))
-
+        print("Price: $" + str(price))
+        print("Total Owned: $" + str(totalOwned))
         if (owned):
-            profit = (a.percentDiff(price, averagePrice) / 100)* amountInUSD
+            profit = (a.percentDiff(price, averagePrice) / 100) * amountInUSD
             print("Profit: $" + str(profit))
     
     if (command == "show"):
@@ -44,21 +53,19 @@ while not over:
     
     if (command == "BUY"):
         r.order_buy_crypto_by_price(ticker, amountInUSD)
-        unitsOwned += 1
-        averagePrice += price
-        averagePrice /= unitsOwned
-        amountInAsset += round(amountInUSD / price, 5)
         print("Bought at $" + str(price))
         owned = True
+        totalOwned += price
+        unitsOwned += 1
+        averagePrice = totalOwned / unitsOwned
 
     if (command == "SELL"):
-        if (unitsOwned == 0):
-            unitsOwned = 1
-        r.order_sell_crypto_by_quantity(ticker, amountInAsset*unitsOwned)
+        r.order_sell_crypto_by_price(ticker, amountInUSD*unitsOwned)
         print("Sold at $" + str(price))
         owned = False
         averagePrice = 0
         unitsOwned = 0
+        totalOwned = 0
     
     print('\n')
     
