@@ -1,6 +1,7 @@
 import dataScrape as d
 import analysis as a
 import robin_stocks as r
+from time import sleep
 
 d.login()
 
@@ -23,7 +24,7 @@ totalOwned = 0
 auto = True
 
 while not over:
-    if auto:
+    if (auto):
         command = "auto"
     else:
         command = input("Enter command: ")
@@ -34,11 +35,22 @@ while not over:
         over = True
     
     if (command == "auto"):
+        data = d.dataPoints(ticker, 0, 1)
+        a.showIndicators(data)
+        print("Price: $" + str(price))
+        print("Total Owned: $" + str(totalOwned))
         reccomendation = a.strat(verbose = False)
         if (reccomendation == 1):
             command = "BUY"
         else:
             command = "SELL"
+        
+        if (owned):
+            profit = (a.percentDiff(price, averagePrice) / 100) * amountInUSD
+            print("Profit: $" + str(profit))
+            if (profit > .5):
+                command = "SELL"
+                print("Taking profits")
     
     if (command == "price"):
         print("Price: $" + str(price))
@@ -65,15 +77,19 @@ while not over:
         averagePrice = totalOwned / unitsOwned
 
     if (command == "SELL"):
-        r.order_sell_crypto_by_price(ticker, amountInUSD*unitsOwned)
-        print("Sold at $" + str(price))
-        profit = (a.percentDiff(price, averagePrice) / 100) * amountInUSD
-        print("Profit: $" + str(profit))
-        owned = False
-        averagePrice = 0
-        unitsOwned = 0
-        totalOwned = 0
+        if (unitsOwned > 0):
+            r.order_sell_crypto_by_price(ticker, amountInUSD*unitsOwned)
+            print("Sold at $" + str(price))
+            if (owned):
+                profit = (a.percentDiff(price, averagePrice) / 100) * amountInUSD
+                print("Profit: $" + str(profit))
+            owned = False
+            averagePrice = 0
+            unitsOwned = 0
+            totalOwned = 0
          
+    if (auto):
+        sleep(300)
     
     print('\n')
     
