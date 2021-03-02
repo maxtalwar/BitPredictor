@@ -20,8 +20,13 @@ averagePrice = 0
 
 totalOwned = 0
 
+auto = True
+
 while not over:
-    command = input("Enter command: ")
+    if auto:
+        command = "auto"
+    else:
+        command = input("Enter command: ")
 
     price = d.price(ticker)
     
@@ -62,10 +67,13 @@ while not over:
     if (command == "SELL"):
         r.order_sell_crypto_by_price(ticker, amountInUSD*unitsOwned)
         print("Sold at $" + str(price))
+        profit = (a.percentDiff(price, averagePrice) / 100) * amountInUSD
+        print("Profit: $" + str(profit))
         owned = False
         averagePrice = 0
         unitsOwned = 0
         totalOwned = 0
+         
     
     print('\n')
     

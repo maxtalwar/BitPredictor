@@ -1,4 +1,4 @@
-import requests, json
+import requests
 import robin_stocks as r
 import analysis as a
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
