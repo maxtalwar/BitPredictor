@@ -43,8 +43,3 @@ def predict (train = 'prices.csv', predict ='predict.csv', features = []):
     #model.save('classifier.model')
 
     return info
-
-    """if (len(predictions) == 1):
-        return predictions[0]
-    else:
-        return predictions"""

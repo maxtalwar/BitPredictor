@@ -206,7 +206,9 @@ def direction(ticker='BTC', backtrack = 0, api = 1):
     return round(float(result['value']), 4)
 
 def price(ticker='BTC'):
+    login()
     return float(r.crypto.get_crypto_quote(ticker)['ask_price'])
+
 
 def buy(ticker, amountInAsset):
     r.order_buy_crypto_by_quantity(ticker, amountInAsset)
@@ -230,6 +232,7 @@ def dataPoints(ticker='BTC', backTrack=0, API = 1):
         try:
             success = True
             data = getData(ticker, backTrack, API)
+            print(data)
         except:
             success = False
             if (API == 1):
@@ -242,7 +245,7 @@ def dataPoints(ticker='BTC', backTrack=0, API = 1):
     return data
 
 def getData(ticker='BTC', backTrack=0, API = 1):
-    return [RSI(ticker, backtrack = backTrack, api = API), ultOSC(ticker, backtrack = backTrack, api = API), stochRSI(ticker, backtrack = backTrack, api = API), DMI(ticker, val = 'plusdi', backtrack = backTrack, api = API), DMI(ticker, val = 'minusdi', backtrack = backTrack, api = API), ROC(ticker, backtrack = backTrack, api = API), direction(ticker, backtrack = backTrack, api = API), price(ticker)]
+    return [RSI(ticker, backtrack = backTrack, api = API), ultOSC(ticker, backtrack = backTrack, api = API), stochRSI(ticker, backtrack = backTrack, api = API), DMI(ticker, val = 'plusdi', backtrack = backTrack, api = API), DMI(ticker, val = 'minusdi', backtrack = backTrack, api = API), ROC(ticker, backtrack = backTrack, api = API), direction(ticker, backtrack = backTrack, api = API)]
 
 def dataPointsTwo(ticker='BTC', backTrack=10):
     print(ticker)

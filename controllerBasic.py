@@ -11,7 +11,7 @@ startingCash = float(input("How much cash in your account? "))
 
 owned = False
 
-ticker = "BTC"
+ticker = "ETH"
 
 api = 1
 
@@ -25,8 +25,6 @@ amountInAsset = round(amountInUSD/d.price(ticker), 5)
 
 print("Asset amount traded on: " + str(amountInAsset) + " " + ticker)
 
-sleep(30)
-
 # iterates a certain amount of times
 for i in range (cycles):
 	print('\n')
@@ -37,29 +35,20 @@ for i in range (cycles):
 	print("Current Time =", current_time)
 
 	# gets the data
-	try:
-		indicators = d.dataPoints(ticker, 0, api)
-	except:
-		print("Datapoint scraping failed - redirecting api")
-	
-		if (api == 1):
-			api = 0
-		else:
-			api = 1
-	
-		indicators = d.dataPoints(ticker, 0, api)
+	indicators = d.dataPoints(ticker, 0, api)
 
-	indicators.pop(-1)
+	# adds a comma value to the data so it works with a csv file
+	indicators.append("")
+
 	# adds the predict data to a csv file
 	a.append_list_as_row('predict.csv', headers, 'w')
 	a.append_list_as_row("predict.csv", indicators, 'a')
-
 	a.showIndicators(indicators)
 
 	# creates the model and the prediction
-	model = a.strat(indicators, verbose = False)
-	predict = model[0]
+	predict = a.strat(indicators, verbose = False)
 
+	# shows the prediction
 	if (predict == 1):
 		print("Predicted action: BUY")
 	else:
@@ -72,8 +61,8 @@ for i in range (cycles):
 		d.login()
 		price = d.price(ticker)
 
+	# shows the price and holdings
 	print("Price: $" + str(price))
-
 	print("Owned: " + str(owned))
 
 	# chekcs to see if the bot should buy

@@ -83,20 +83,29 @@ def getAPIKey(id):
     return keys[id]
 
 def stratAI():
-    sell = []
-    buy = []
-
-    for i in range(20):
-        results = predict()
-        if results[0] == 0:
-            sell.append(results[1])
-        else:
-            buy.append(results[1])
+    buyVotes = 0
+    sellVotes = 0
     
-    if (average(sell) > average(buy)):
-        return 0
-    else:
+    for i in range(3):
+        sell = []
+        buy = []
+        for x in range(25):
+            results = predict()
+            if results[0] == 0:
+                sell.append(results[1])
+            else:
+                buy.append(results[1])
+        
+        if (average(sell) > average(buy)):
+            sellVotes += 1
+        else:
+            buyVotes += 1
+    print(buyVotes)
+    print(sellVotes)
+    if (buyVotes > sellVotes):
         return 1
+    else:
+        return 0
 
 def stratAITwo(verbose = True):
     best = 0
@@ -121,4 +130,6 @@ def strat(indicators = [], verbose = False):
     return stratAI()
 
 def average(list):
+    if (len(list) == 0):
+        return 0
     return sum(list) / len(list)

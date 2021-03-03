@@ -55,13 +55,9 @@ def cycle(step, oldPrice, purchasePrice, appreciation, steps, time, amount, oldI
             suspension = True
             print("Suspended")
         
-        headers = ["RSI","MA","EMA", "TIME","CHANGE"]
+        headers = a.setHeaders()
 
-        indicators = data.dataPointsS()
-
-        indicators.append(10)
-
-        #indicators.append("")
+        indicators = data.dataPoints()
 
         a.append_list_as_row('predict.csv', headers, 'w')
 
