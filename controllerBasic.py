@@ -7,21 +7,22 @@ from datetime import datetime
 d.login()
 
 # defines starting variables
+
+ticker = str(input("Ticker: "))
+
 startingCash = float(input("How much cash in your account? "))
-
-owned = False
-
-ticker = "ETH"
-
-api = 1
-
-headers = a.setHeaders()
 
 amountInUSD = float(input("Trade amount (USD): "))
 
 cycles = int(input("How many cycles? "))
 
 amountInAsset = round(amountInUSD/d.price(ticker), 5)
+
+owned = False
+
+api = 1
+
+headers = a.setHeaders()
 
 print("Asset amount traded on: " + str(amountInAsset) + " " + ticker)
 
@@ -35,7 +36,7 @@ for i in range (cycles):
 	print("Current Time =", current_time)
 
 	# gets the data
-	indicators = d.dataPoints(ticker, 0, api)
+	indicators = d.dataPoints(ticker, api)
 
 	# adds a comma value to the data so it works with a csv file
 	indicators.append("")
@@ -51,8 +52,10 @@ for i in range (cycles):
 	# shows the prediction
 	if (predict == 1):
 		print("Predicted action: BUY")
-	else:
+	elif (predict == 0):
 		print("Predicted action: SELL")
+	else:
+		print("Predicted action: HOLD")
 
 	# gets the price
 	try:
@@ -66,30 +69,52 @@ for i in range (cycles):
 	print("Owned: " + str(owned))
 
 	# chekcs to see if the bot should buy
-	if (predict and not owned):
-		purchasePrice = price
+	if (predict == True and not owned):
+		amountInAsset = round(amountInUSD/price, 5)
 		owned = True
 		d.buy(ticker, amountInAsset)
-
+		print("Bought at: $" + str(price))
+	
+	# checks to see if the bot should sell
+	elif (predict == False and owned):
+		profit = amountInAsset*price - amountInUSD
+		print("Profit: $" + str(profit))
+		if (profit > .2):
+			d.sell(ticker, amountInAsset)
+			amountInAsset = 0
+			owned = False
+	
 	# checks to see if the bot should take profits
-	elif (predict and owned):
-		if (((price - purchasePrice) / purchasePrice)*100 >= 1):
+	elif (owned):
+		profit = amountInAsset*price - amountInUSD
+		if (profit >= .25):
 			owned = False
 			d.sell(ticker, amountInAsset)
 			print("Sold Asset (Taking gains)")
-			amountInAsset = round(amountInUSD/d.price(ticker), 5)
-			margin = a.percentDiff(price, purchasePrice)/100
-			print("Profit: $" + str(margin*amountInUSD))
+			print("Profit: $" + str(profit))
+		elif (profit <= -.5):
+			owned = False
+			d.sell(ticker, amountInAsset)
+			print("Sold Asset (Stopping Losses)")
+			print("Profit: $" + str(profit))
 	
-	# checks to see if the bot should sell
-	elif (not predict and owned):
-		owned = False
-		d.sell(ticker, amountInAsset)
-		amountInAsset = round(amountInUSD/d.price(ticker), 5)
-		margin = a.percentDiff(price, purchasePrice)/100
-		print("Profit: $" + str(margin*amountInUSD))
+	if (owned):
+		for i in range(4):
+			sleep(150)
+			price = d.price(ticker)
+			profit = amountInAsset*price - amountInUSD
+			if (profit >= .25):
+				print('\n')
+				owned = False
+				d.sell(ticker, amountInAsset)
+				print("Sold Asset (Taking gains)")
+				print("Sold at: " + str(price))
+				print("Profit: $" + str(amountInAsset*d.price(ticker) - amountInUSD))
+				break
+	else:
+		sleep(600)
 
-	sleep(600)
+print('\n')
 
 # sells all assets at the end
 if (owned):
@@ -98,9 +123,13 @@ if (owned):
 
 sleep(180)
 
-cash = r.build_user_profile()['cash']
+cash = r.account.load_phoenix_account(info=None)['account_buying_power']['amount']
 
 profit = float(cash) - startingCash
+
+print(cash)
+
+print(startingCash)
 
 print("You profited: $"  + str(profit) + " over the course of " + str(cycles*10) + " minutes")
 

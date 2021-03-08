@@ -10,7 +10,7 @@ import os
 def getPwd():
     return os.environ['RH_PWD']
 
-def RSI(ticker='BTC', backtrack=0, api = 1):
+def RSI(ticker='BTC', api = 1):
     # Define indicator
     indicator = "rsi"
     
@@ -26,8 +26,7 @@ def RSI(ticker='BTC', backtrack=0, api = 1):
         'exchange': 'binance',
         'symbol': ticker + '/USDT',
         'interval': '1m',
-        'optInTimePeriod':'10',
-        'backtrack':backtrack        
+        'optInTimePeriod':'10'      
         } 
     
     # Send get request and save the response as response object 
@@ -38,7 +37,7 @@ def RSI(ticker='BTC', backtrack=0, api = 1):
 
     return round(float(result['value']), 4)
 
-def stochRSI(ticker='BTC', backtrack=0, api = 1):
+def stochRSI(ticker='BTC', api = 1):
     # Define indicator
     indicator = "stochf"
     
@@ -54,8 +53,7 @@ def stochRSI(ticker='BTC', backtrack=0, api = 1):
         'exchange': 'binance',
         'symbol': ticker + '/USDT',
         'interval': '1m',
-        'optInTimePeriod':'12',
-        'backtrack':backtrack        
+        'optInTimePeriod':'12'      
         } 
     
     # Send get request and save the response as response object 
@@ -67,7 +65,7 @@ def stochRSI(ticker='BTC', backtrack=0, api = 1):
     return round(float(result['valueFastK']), 4)
 
 # Average Directional Index
-def ADX(ticker='BTC', backtrack=0, api = 1):
+def ADX(ticker='BTC', api = 1):
     # Define indicator
     indicator = "adx"
     
@@ -82,8 +80,7 @@ def ADX(ticker='BTC', backtrack=0, api = 1):
         'secret': secret,
         'exchange': 'binance',
         'symbol': ticker + '/USDT',
-        'interval': '1m',
-        'backtrack':backtrack
+        'interval': '1m'
         } 
     
     # Send get request and save the response as response object 
@@ -95,7 +92,7 @@ def ADX(ticker='BTC', backtrack=0, api = 1):
     return round(float(result['value']), 4)
 
 # Ultimate Oscillator
-def ultOSC(ticker='BTC', backtrack=0, api = 1):
+def ultOSC(ticker='BTC', api = 1):
     # Define indicator
     indicator = "ultosc"
     
@@ -110,8 +107,7 @@ def ultOSC(ticker='BTC', backtrack=0, api = 1):
         'secret': secret,
         'exchange': 'binance',
         'symbol': ticker + '/USDT',
-        'interval': '1m',
-        'backtrack':backtrack
+        'interval': '1m'
         } 
     
     # Send get request and save the response as response object 
@@ -123,7 +119,7 @@ def ultOSC(ticker='BTC', backtrack=0, api = 1):
     return round(float(result['value']), 4)
 
 # directional movement index
-def DMI(ticker='BTC', val = 'plusdi', backtrack=0, api = 1):
+def DMI(ticker='BTC', val = 'plusdi', api = 1):
     # Define indicator
     indicator = "dmi"
     
@@ -138,8 +134,7 @@ def DMI(ticker='BTC', val = 'plusdi', backtrack=0, api = 1):
         'secret': secret,
         'exchange': 'binance',
         'symbol': ticker + '/USDT',
-        'interval': '1m',
-        'backtrack':backtrack
+        'interval': '1m'
         } 
     
     # Send get request and save the response as response object 
@@ -151,7 +146,7 @@ def DMI(ticker='BTC', val = 'plusdi', backtrack=0, api = 1):
     return round(float(result[val]), 4)
 
 # Rate of Change Indicator
-def ROC(ticker='BTC', backtrack=0, api=1):
+def ROC(ticker='BTC', api=1):
     # Define indicator
     indicator = "roc"
     
@@ -166,8 +161,7 @@ def ROC(ticker='BTC', backtrack=0, api=1):
         'secret': secret,
         'exchange': 'binance',
         'symbol': ticker + '/USDT',
-        'interval': '1m',
-        'backtrack':backtrack
+        'interval': '1m'
         } 
     
     # Send get request and save the response as response object 
@@ -178,7 +172,7 @@ def ROC(ticker='BTC', backtrack=0, api=1):
 
     return round(float(result['value']), 4)
 
-def direction(ticker='BTC', backtrack = 0, api = 1):
+def direction(ticker='BTC', api = 1):
     # Define indicator
     indicator = "pd"
     
@@ -193,8 +187,7 @@ def direction(ticker='BTC', backtrack = 0, api = 1):
         'secret': secret,
         'exchange': 'binance',
         'symbol': ticker + '/USDT',
-        'interval': '1m',
-        'backtrack':backtrack
+        'interval': '1m'
         } 
     
     # Send get request and save the response as response object 
@@ -212,11 +205,9 @@ def price(ticker='BTC'):
 
 def buy(ticker, amountInAsset):
     r.order_buy_crypto_by_quantity(ticker, amountInAsset)
-    print("Bought")
 
 def sell(ticker, amountInAsset):
     r.order_sell_crypto_by_quantity(ticker, amountInAsset)
-    print("Sold")
 
 def login():
     # Logs into Robinhood
@@ -226,13 +217,12 @@ def login():
          expiresIn=86400,
          by_sms=True)
     
-def dataPoints(ticker='BTC', backTrack=0, API = 1):
+def dataPoints(ticker='BTC', API = 1):
     success = False
     while not success:
         try:
             success = True
-            data = getData(ticker, backTrack, API)
-            print(data)
+            data = getData(ticker, API)
         except:
             success = False
             if (API == 1):
@@ -244,8 +234,8 @@ def dataPoints(ticker='BTC', backTrack=0, API = 1):
     print("Ticker: " + ticker)
     return data
 
-def getData(ticker='BTC', backTrack=0, API = 1):
-    return [RSI(ticker, backtrack = backTrack, api = API), ultOSC(ticker, backtrack = backTrack, api = API), stochRSI(ticker, backtrack = backTrack, api = API), DMI(ticker, val = 'plusdi', backtrack = backTrack, api = API), DMI(ticker, val = 'minusdi', backtrack = backTrack, api = API), ROC(ticker, backtrack = backTrack, api = API), direction(ticker, backtrack = backTrack, api = API)]
+def getData(ticker='BTC', API = 1):
+    return [RSI(ticker, api = API), ultOSC(ticker, api = API), stochRSI(ticker, api = API), DMI(ticker, val = 'plusdi', api = API), DMI(ticker, val = 'minusdi', api = API), ROC(ticker, api = API), direction(ticker, api = API)]
 
 def dataPointsTwo(ticker='BTC', backTrack=10):
     print(ticker)

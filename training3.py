@@ -49,18 +49,21 @@ for i in range (cycles):
     print(str(i+1) + ":" + str(cycles))
 
     # gets the data
-    try:
-        data = d.dataPoints(ticker, 0, api)
-    except:
-        print("Datapoint scraping failed - redirecting api")
-        if (api == 1):
-            api = 0
-        else:
-            api = 1
-        data = d.dataPoints(ticker, 0, api)
+    data = d.dataPoints(ticker, api)
 
     # shows the data
     a.showIndicators(data)
+
+    # sets the old price
+    try:
+        oldPrice = d.price(ticker)
+    except:
+        # Logs into Robinhood
+        login = d.login()
+        oldPrice = d.price(ticker)
+    
+    # adds the price to the dataset
+    data.append(oldPrice)
 
     # waits until the data is old enough to measure its performance
     sleep(600)
@@ -74,11 +77,11 @@ for i in range (cycles):
         price = d.price(ticker)
 
     # displays the old price and the price
-    print("Old Price: " + str(data[-1]))
+    print("Old Price: " + str(oldPrice))
     print("Price: " + str(price))
 
     # checks the price against the old price
-    if (price > data[-1]):
+    if (price > oldPrice):
         data[-1] = 1
     else:
         data[-1] = 0

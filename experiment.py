@@ -150,7 +150,7 @@ print(price)
 
 amountInAsset = round(30/price, 4)
 
-d.buy(ticker, amountInAsset)"""
+d.buy(ticker, amountInAsset)
 
 ticker = "BTC"
 
@@ -160,4 +160,7 @@ amountInUSD = 100
 
 amountInAsset = round(amountInUSD / d.price(ticker), 5)
 
-r.order_sell_crypto_by_quantity(ticker, amountInAsset*unitsOwned)
+r.order_sell_crypto_by_quantity(ticker, amountInAsset*unitsOwned)"""
+cash = r.account.load_phoenix_account(info=None)['account_buying_power']['amount']
+
+print(cash)

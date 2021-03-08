@@ -83,10 +83,14 @@ def getAPIKey(id):
     return keys[id]
 
 def stratAI():
+    # average time per generated prediction using a 1660 ti and a 10th gen intel i5: .38872 seconds
+
+    # total votes for buying and selling
     buyVotes = 0
     sellVotes = 0
     
-    for i in range(3):
+    # generates 125 predictions
+    for i in range(5):
         sell = []
         buy = []
         for x in range(25):
@@ -102,10 +106,11 @@ def stratAI():
             buyVotes += 1
     print(buyVotes)
     print(sellVotes)
-    if (buyVotes > sellVotes):
+    if (buyVotes >= 4):
         return 1
-    else:
+    elif (sellVotes > buyVotes):
         return 0
+    return "HOLD"
 
 def stratAITwo(verbose = True):
     best = 0

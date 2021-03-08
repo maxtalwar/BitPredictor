@@ -69,10 +69,6 @@ def cycle(step, oldPrice, purchasePrice, appreciation, steps, time, amount, oldI
         print("Current price of BCH: $" + str(price))
 
         if (owned):
-            """diff = price - purchasePrice
-            appreciation = diff / purchasePrice
-            appreciation *= 100
-            print("Total return: " + str(appreciation) + "%")"""
             diff = price - oldPrice
             diff /= oldPrice
             holdings *= (diff + 1)
