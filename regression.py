@@ -18,7 +18,7 @@ def predict (train = 'prices.csv', predict ='predict.csv', features = []):
     if (len(features) > 0):
         f = features
     else:
-        f = a.setHeaders()
+        f = a.getHeaders()
         f.remove("CHANGE")
 
     # Selects the best model based on your data.

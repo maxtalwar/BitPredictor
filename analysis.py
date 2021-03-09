@@ -59,7 +59,7 @@ def getHeaders():
     return ["RSI", "ULTOSC", "STOCHRSI", "+DI", "-DI", "ROC", "PD", "CHANGE"]
 
 def showIndicators(indicators):
-    headers = setHeaders()
+    headers = getHeaders()
     headers.remove("CHANGE")
     for i in range (len(headers)):
         print(str(headers[i]) + ": " + str(indicators[i]))
@@ -104,11 +104,12 @@ def stratAI():
             sellVotes += 1
         else:
             buyVotes += 1
-    print(buyVotes)
-    print(sellVotes)
+    
     if (buyVotes >= 4):
+        print(buyVotes / 5)
         return 1
     elif (sellVotes > buyVotes):
+        print(sellVotes / 5)
         return 0
     return "HOLD"
 

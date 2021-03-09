@@ -2,7 +2,7 @@ import dataScrape as d
 from time import sleep
 import analysis as a
 
-startingCash = int(input("Starting cash: "))
+startingCash = float(input("Starting cash: "))
 
 ticker = "BTC"
 
@@ -18,18 +18,20 @@ total = 0
 
 correct = 0
 
+owned = False
+
 for i in range(10):
     # gets the data
-	indicators = d.dataPoints(ticker, api)
+    indicators = d.dataPoints(ticker, api)
     oldPrice = d.price(ticker)
 
-	# adds a comma value to the data so it works with a csv file
-	indicators.append("")
+    # adds a comma value to the data so it works with a csv file
+    indicators.append("")
 
-	# adds the predict data to a csv file
-	a.append_list_as_row('predict.csv', headers, 'w')
-	a.append_list_as_row("predict.csv", indicators, 'a')
-	a.showIndicators(indicators)
+    # adds the predict data to a csv file
+    a.append_list_as_row('predict.csv', headers, 'w')
+    a.append_list_as_row("predict.csv", indicators, 'a')
+    a.showIndicators(indicators)
 
     prediction = a.strat()
 
@@ -55,7 +57,11 @@ for i in range(10):
         profit = amountInAsset*price - amountInUSD
         totalProfit += profit
         print("Profit: $" + str(profit))
+    
+    print('\n')
 
 percentage = (correct / total) * 100
 
 print("Correct percentage: " + str(percentage))
+
+
