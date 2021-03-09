@@ -55,7 +55,7 @@ def complexStrat(indicators):
     
     return "HOLD"
 
-def setHeaders():
+def getHeaders():
     return ["RSI", "ULTOSC", "STOCHRSI", "+DI", "-DI", "ROC", "PD", "CHANGE"]
 
 def showIndicators(indicators):

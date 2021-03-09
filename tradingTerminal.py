@@ -25,6 +25,8 @@ auto = False
 
 cycles = 0
 
+headers = a.getHeaders()
+
 print('\n')
 
 def checkProfit(totalOwned, price, unitsOwned, amountInUSD):
@@ -42,10 +44,19 @@ while not over:
         over = True
     
     if (command == "auto"):
-        data = d.dataPoints(ticker, 0, 1)
+        data = d.dataPoints(ticker, 1)
         a.showIndicators(data)
         print("Price: $" + str(price))
         print("Total Owned: $" + str(totalOwned*price))
+
+        # adds a comma value to the data so it works with a csv file
+        data.append("")
+
+        # adds the predict data to a csv file
+        a.append_list_as_row('predict.csv', headers, 'w')
+        a.append_list_as_row("predict.csv", data, 'a')
+        a.showIndicators(data)
+        
         reccomendation = a.strat(verbose = False)
         if (reccomendation == 1):
             command = "BUY"

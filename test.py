@@ -88,6 +88,7 @@ def test(limit, time, startingHoldings):
     
     return ((correct/total)*100)
 
+ticker = "BTC"
 
 total = 0
 
@@ -109,7 +110,7 @@ time = float(input("Time? "))
 
 holdings = startingHoldings
 
-originalPrice = d.price('BTC')
+originalPrice = d.price(ticker)
 
 print('\n')
 
@@ -134,7 +135,7 @@ else:
     print("Correct percentage: " + str(accuracy) + "%")
 
 
-price = d.price()
+price = d.price(ticker)
 
 diff = a.percentDiff(price, originalPrice)
 
@@ -151,8 +152,3 @@ print("$" + str(startingHoldings) +  " HODLING would have turned into: $" + str(
 print("$" + str(startingHoldings) + " with the alg would have turned into: $" + str(holdings))
 
 print("You profited $" + str(holdings - startingHoldings) + " over the course of " + str(limit*time) + " minutes")
-
-print(actions)
-
-message = email.createMessage("Program Accuracy: " + str(accuracy))
-email.sendEmail(message)

@@ -22,7 +22,7 @@ owned = False
 
 api = 1
 
-headers = a.setHeaders()
+headers = a.getHeaders()
 
 print("Asset amount traded on: " + str(amountInAsset) + " " + ticker)
 
