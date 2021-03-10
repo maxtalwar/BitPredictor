@@ -45,10 +45,15 @@ for i in range(10):
     sleep(600)
 
     price = d.price(ticker)
-
-    if (price > oldPrice):
-        correct += 1
-    total += 1
+    
+    if (prediction == 1):
+        if (price > oldPrice):
+            correct += 1
+            total += 1
+    elif (prediction == 0):
+        if (price < oldPrice):
+            correct += 1
+            total += 1
 
     print("Old Price: $" + str(oldPrice))
     print("Price: $" + str(price))
@@ -64,4 +69,5 @@ percentage = (correct / total) * 100
 
 print("Correct percentage: " + str(percentage))
 
+print("Total Profit: " + str(totalProfit))
 

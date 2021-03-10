@@ -109,7 +109,7 @@ def stratAI():
         print(buyVotes / 5)
         return 1
     elif (sellVotes > buyVotes):
-        print(sellVotes / 5)
+        print(-1 * (sellVotes / 5))
         return 0
     return "HOLD"
 

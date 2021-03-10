@@ -161,6 +161,26 @@ amountInUSD = 100
 amountInAsset = round(amountInUSD / d.price(ticker), 5)
 
 r.order_sell_crypto_by_quantity(ticker, amountInAsset*unitsOwned)"""
-cash = r.account.load_phoenix_account(info=None)['account_buying_power']['amount']
 
-print(cash)
+prediction = 0
+
+price = 10
+
+oldPrice = 9
+
+correct = 0
+
+total = 0
+
+if (prediction == 1):
+    if (price > oldPrice):
+        correct += 1
+elif (prediction == 0):
+    if (price < oldPrice):
+        correct += 1
+
+total += 1
+
+print(correct)
+
+print(total)
