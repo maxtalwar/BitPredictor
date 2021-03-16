@@ -2,8 +2,6 @@ import dataScrape as d
 from time import sleep
 import analysis as a
 
-startingCash = float(input("Starting cash: "))
-
 ticker = "BTC"
 
 api = 1
@@ -20,7 +18,9 @@ correct = 0
 
 owned = False
 
-for i in range(10):
+for i in range(12):
+
+    print("Cycle: " + str(i+1))
     # gets the data
     indicators = d.dataPoints(ticker, api)
     oldPrice = d.price(ticker)
@@ -39,35 +39,48 @@ for i in range(10):
 
     if (prediction == 1):
         owned = True
+        print("BOUGHT")
     if (prediction == 0):
-        owned = False
+        print("SOLD")
 
     sleep(600)
 
     price = d.price(ticker)
+
+    print("Old Price: $" + str(oldPrice))
+    print("Price: $" + str(price))
     
     if (prediction == 1):
         if (price > oldPrice):
             correct += 1
-            total += 1
+            print("Correct")
+        else:
+            print("Incorrect")
+        total += 1
     elif (prediction == 0):
         if (price < oldPrice):
             correct += 1
-            total += 1
-
-    print("Old Price: $" + str(oldPrice))
-    print("Price: $" + str(price))
+            print("Correct")
+        else:
+            print("Incorrect")
+        total += 1
 
     if (owned):
-        profit = amountInAsset*price - amountInUSD
+        profit = (a.percentDiff(price, oldPrice)/100) * amountInUSD
         totalProfit += profit
         print("Profit: $" + str(profit))
     
+    owned = False
+    
     print('\n')
+
+print(correct)
+
+print(total)
 
 percentage = (correct / total) * 100
 
 print("Correct percentage: " + str(percentage))
 
-print("Total Profit: " + str(totalProfit))
+print("Total Profit: $" + str(totalProfit))
 

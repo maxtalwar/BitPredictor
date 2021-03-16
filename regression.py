@@ -40,6 +40,5 @@ def predict (train = 'prices.csv', predict ='predict.csv', features = []):
     info = [predictions[0], results]
 
     # Save the data for future use
-    #model.save('classifier.model')
 
     return info

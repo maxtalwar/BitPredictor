@@ -105,7 +105,7 @@ def stratAI():
         else:
             buyVotes += 1
     
-    if (buyVotes >= 4):
+    if (buyVotes == 5):
         print(buyVotes / 5)
         return 1
     elif (sellVotes > buyVotes):

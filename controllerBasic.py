@@ -69,7 +69,7 @@ for i in range (cycles):
 	print("Owned: " + str(owned))
 
 	# chekcs to see if the bot should buy
-	if (predict == True and not owned):
+	if (predict == True and not owned and indicators[0] <= 60):
 		amountInAsset = round(amountInUSD/price, 5)
 		owned = True
 		d.buy(ticker, amountInAsset)
@@ -79,10 +79,9 @@ for i in range (cycles):
 	elif (predict == False and owned):
 		profit = amountInAsset*price - amountInUSD
 		print("Profit: $" + str(profit))
-		if (profit > .2):
-			d.sell(ticker, amountInAsset)
-			amountInAsset = 0
-			owned = False
+		d.sell(ticker, amountInAsset)
+		amountInAsset = 0
+		owned = False
 	
 	# checks to see if the bot should take profits
 	elif (owned):
@@ -103,11 +102,11 @@ for i in range (cycles):
 			sleep(150)
 			price = d.price(ticker)
 			profit = amountInAsset*price - amountInUSD
-			if (profit >= .25):
+			if (profit >= .3 or profit <= -.5):
 				print('\n')
 				owned = False
 				d.sell(ticker, amountInAsset)
-				print("Sold Asset (Taking gains)")
+				print("Sold Asset (Taking gains / stop loss)")
 				print("Sold at: " + str(price))
 				print("Profit: $" + str(amountInAsset*d.price(ticker) - amountInUSD))
 				break
@@ -118,8 +117,7 @@ print('\n')
 
 # sells all assets at the end
 if (owned):
-    r.order_sell_crypto_by_quantity(ticker, amountInAsset)
-    print("Sold all assets - closed out")
+    input("Please note: there is still " + str(amountInAsset) +  ticker + " in the account that has not been sold. Hit enter when you have successfully sold this amount")
 
 sleep(180)
 
@@ -127,9 +125,9 @@ cash = r.account.load_phoenix_account(info=None)['account_buying_power']['amount
 
 profit = float(cash) - startingCash
 
-print(cash)
+print("Current Cash: $" + str(cash))
 
-print(startingCash)
+print("Starting Cash: $" + str(startingCash))
 
 print("You profited: $"  + str(profit) + " over the course of " + str(cycles*10) + " minutes")
 
