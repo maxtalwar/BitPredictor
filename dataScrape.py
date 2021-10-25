@@ -7,8 +7,20 @@ import os
 
 # note: this seems unchangable, but the API provides data for the "close" -- the default in Binance's chart is set to "open", so you will see a discripancy unless you adjust the settings on the chart
 
+interval = '5m'
+
 def getPwd():
     return os.environ['RH_PWD']
+
+def login():
+    # Logs into Robinhood
+    pwd = getPwd()
+    r.login(username="nicktalwar",
+         password=pwd,
+         expiresIn=86400,
+         by_sms=True)
+        
+    print("Successfully logged in to Robinhood API")
 
 def RSI(ticker='BTC', api = 1):
     # Define indicator
@@ -209,13 +221,7 @@ def buy(ticker, amountInAsset):
 def sell(ticker, amountInAsset):
     r.order_sell_crypto_by_quantity(ticker, amountInAsset)
 
-def login():
-    # Logs into Robinhood
-    pwd = getPwd()
-    r.login(username="nicktalwar",
-         password=pwd,
-         expiresIn=86400,
-         by_sms=True)
+
     
 def dataPoints(ticker='BTC', API = 1):
     success = False
@@ -233,6 +239,19 @@ def dataPoints(ticker='BTC', API = 1):
                 API = 1
     print("Ticker: " + ticker)
     return data
+
+def convertIndicators(ticker, API, symbol):
+    conversions = {
+        "RSI": RSI(ticker, api = API),
+        "ultOSC": ultOSC(ticker, api = API),
+        "stochRSI": stochRSI(ticker, api = API),
+        "+DI": DMI(ticker, val = 'plusdi', api = API),
+        "-DI": DMI(ticker, val = 'minusdi', api = API),
+        "ROC": ROC(ticker, api = API),
+        "PD": direction(ticker, api = API)
+    }
+
+    return conversions[symbol]
 
 def getData(ticker='BTC', API = 1):
     return [RSI(ticker, api = API), ultOSC(ticker, api = API), stochRSI(ticker, api = API), DMI(ticker, val = 'plusdi', api = API), DMI(ticker, val = 'minusdi', api = API), ROC(ticker, api = API), direction(ticker, api = API)]

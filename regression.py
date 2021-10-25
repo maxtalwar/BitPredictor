@@ -3,18 +3,17 @@ import turicreate as tc
 import analysis as a
 
 def predict (train = 'prices.csv', predict ='predict.csv', features = []):
-
+    # Load the prediction and training data
+    data = tc.SFrame.read_csv(train, header=True, verbose=False)
     predict_data = tc.SFrame.read_csv(predict, header=True, verbose = False)
 
-    # Load the data
-    data =  tc.SFrame.read_csv(train, header=True, verbose=False)
-
+    # divide the data between training data and testing data
     train_data, test_data = data.random_split(0.8)
 
     #train_data = tc.SFrame.read_csv(train, header=True, verbose = False)
 
     # 'RSI', 'ULTOSC', 'STOCHRSI', '+DI', '-DI', 'ROC', 'PD', 'CHANGE'
-
+    # if the function has not been given custom features, get the default feature from getHeaders()
     if (len(features) > 0):
         f = features
     else:
@@ -40,5 +39,4 @@ def predict (train = 'prices.csv', predict ='predict.csv', features = []):
     info = [predictions[0], results]
 
     # Save the data for future use
-
     return info

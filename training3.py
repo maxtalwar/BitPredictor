@@ -33,9 +33,7 @@ else:
     ticker = 'BTC'
 
 api = argsDict['api']
-
 cycles = argsDict['cycles']
-
 delay = argsDict['delay']
 
 sleep(delay)
