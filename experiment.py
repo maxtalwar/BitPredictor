@@ -1,14 +1,11 @@
-import robin_stocks as r
+import robin_stocks.robinhood as r
 import dataScrape as d
 import regression
 import analysis as a
 from time import sleep
 import csv
 import pandas as pd
-import emailClient as email
 import statistics as stats
-
-d.login()
 
 """amount = int(input("Much much to trade on? "))
 
@@ -161,3 +158,6 @@ amountInUSD = 100
 amountInAsset = round(amountInUSD / d.price(ticker), 5)
 
 r.order_sell_crypto_by_quantity(ticker, amountInAsset*unitsOwned)"""
+
+pwd = d.getPwd()
+d.login()

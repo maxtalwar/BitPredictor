@@ -1,22 +1,17 @@
 import dataScrape as d
 from time import sleep
 import analysis as a
-import robin_stocks as r
+import robin_stocks.robinhood as r
 
 d.login()
 
 ticker = "BTC"
 
 api = 1
-
-headers = a.getHeaders()
-
 amountInUSD = 200
-
 totalProfit = 0
-
 owned = False
-
+headers = a.getHeaders()
 startingCash = r.account.load_phoenix_account(info=None)['account_buying_power']['amount']
 
 print("Cash: $" + str(startingCash))
@@ -28,6 +23,7 @@ for i in range(12):
     indicators = d.dataPoints(ticker, api)
     price = d.price(ticker)
     indicators.append("")
+    print('Gathered data \n')
     
     # adds the predict data to a csv file
     a.append_list_as_row('predict.csv', headers, 'w')

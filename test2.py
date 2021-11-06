@@ -20,6 +20,8 @@ for i in range(12):
     indicators = data.dataPoints(ticker, api)
     oldPrice = data.price(ticker)
 
+    print("Scraped data")
+
     # adds a comma value to the data so it works with a csv file
     indicators.append("")
 

@@ -43,7 +43,6 @@ a.append_list_as_row('prices.csv', [], 'a')
 for i in range (cycles):
     # spaces out the board and shows the current cycle
     print('\n')
-
     print(str(i+1) + ":" + str(cycles))
 
     # gets the data

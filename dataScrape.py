@@ -1,5 +1,5 @@
 import requests
-import robin_stocks as r
+import robin_stocks.robinhood as r
 import analysis as a
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
