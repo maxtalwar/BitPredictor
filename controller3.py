@@ -47,6 +47,9 @@ for i in range(12):
     if (prediction == 0):
         print("Reccomended action: SELL")
 
+        if (owned):
+            r.order_sell_crypto_by_quantity(ticker, amountInAsset)
+
     oldPrice = price
     price = d.price(ticker)
 
@@ -57,8 +60,10 @@ for i in range(12):
     if (owned):
         for i in range(10):
             sleep(30)
+
             price = d.price(ticker)
             profit = (a.percentDiff(price, oldPrice)/100) * amountInUSD
+
             print("Price: $" + str(price))
             print("Profit: $" + str(profit))
             if (profit > .2):
