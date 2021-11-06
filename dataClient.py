@@ -269,7 +269,10 @@ def SymbolToData(symbol, ticker, API):
 
     return conversions[symbol]
 
-def getData(symbols, ticker = 'BTC', API = 1):
+def getData(symbols=a.getHeaders(), ticker = 'BTC', API = 1):
+    if ("CHANGE" in symbols):
+        symbols.remove("CHANGE")
+    
     data = []
 
     for symbol in symbols:
