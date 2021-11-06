@@ -7,7 +7,6 @@ for i in range (200):
     sleep(300)
 
     print('\n')
-
     print(i+1)
 
     try:
@@ -26,7 +25,6 @@ for i in range (200):
     data.pop()
 
     a.showIndicators(data)
+    a.store_csv_indicators(data, 'prices.csv')
 
     print("CHANGE: " + str(data[-1]))
-
-    a.store_csv_indicators(data, 'prices.csv')
