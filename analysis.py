@@ -73,14 +73,25 @@ def APIKeyTwo():
 def APIKeyThree():
     return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRhcmswbmNvZGVyQGdtYWlsLmNvbSIsImlhdCI6MTYxNDU2Mzc0NCwiZXhwIjo3OTIxNzYzNzQ0fQ.yHWO1Y3p-NSUWy_N0DwGIiqC9EtjrmB2yYHdz-AWUuQ'
 
+def APIKeyFour():
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5sZWFmZXIwNUBnbWFpbC5jb20iLCJpYXQiOjE2MzYyMjA0ODYsImV4cCI6Nzk0MzQyMDQ4Nn0.uwonW4C7Zknvw75MRUq34by1Zakj_AGoL-jIbDM6V-M'
 
 def getAPIKey(id):
     keys = {
         1:APIkey(),
         2:APIKeyTwo(),
-        3:APIKeyThree()
+        3:APIKeyThree(),
+        4:APIKeyFour()
     }
     return keys[id]
+
+def shuffleKeys(key):
+    key += 1
+
+    if (key > 4):
+        key = 1
+    
+    return key
 
 def stratAI():
     # average time per generated prediction using a 1660 ti and a 10th gen intel i5: .38872 seconds

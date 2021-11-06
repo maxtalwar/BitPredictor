@@ -6,6 +6,7 @@ from time import sleep
 import csv
 import pandas as pd
 import statistics as stats
+import dataClient as data
 
 """amount = int(input("Much much to trade on? "))
 
@@ -159,5 +160,30 @@ amountInAsset = round(amountInUSD / d.price(ticker), 5)
 
 r.order_sell_crypto_by_quantity(ticker, amountInAsset*unitsOwned)"""
 
+
+
+
+"""data = dataClient.getData("BTC", 1, ["RSI", "ultOSC"])
+print("gathered data one")"""
+
+
+
+
+"""
 pwd = d.getPwd()
 d.login()
+
+print(1)
+
+dataTwo = d.dataPoints()
+print("gathered data two")
+
+print(dataTwo)"""
+
+API = 1
+ticker = "BTC"
+
+#test = [d.RSI(ticker, api = API), d.ultOSC(ticker, api = API), d.stochRSI(ticker, api = API), d.DMI(ticker, val = 'plusdi', api = API)]
+test = data.getData(a.getHeaders(), ticker, API)
+
+print(test)

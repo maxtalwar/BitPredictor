@@ -47,7 +47,12 @@ def RSI(ticker='BTC', api = 1):
     # Extract data in json format 
     result = response.json() 
 
-    return round(float(result['value']), 4)
+    try:
+        return round(float(result['value']), 4)
+    except:
+        api = a.shuffleKeys(api)
+
+        return RSI(ticker, api)
 
 def stochRSI(ticker='BTC', api = 1):
     # Define indicator
@@ -74,7 +79,12 @@ def stochRSI(ticker='BTC', api = 1):
     # Extract data in json format 
     result = response.json() 
 
-    return round(float(result['valueFastK']), 4)
+    try:
+        return round(float(result['valueFastK']), 4)
+    except:
+        api = a.shuffleKeys(api)
+
+        return stochRSI(ticker, api)
 
 # Average Directional Index
 def ADX(ticker='BTC', api = 1):
@@ -101,7 +111,12 @@ def ADX(ticker='BTC', api = 1):
     # Extract data in json format 
     result = response.json() 
 
-    return round(float(result['value']), 4)
+    try:
+        return round(float(result['value']), 4)
+    except:
+        api = a.shuffleKeys(api)
+
+        return ADX(ticker, api)
 
 # Ultimate Oscillator
 def ultOSC(ticker='BTC', api = 1):
@@ -126,9 +141,15 @@ def ultOSC(ticker='BTC', api = 1):
     response = requests.get(url = endpoint, params = parameters)
     
     # Extract data in json format 
-    result = response.json() 
+    result = response.json()
 
-    return round(float(result['value']), 4)
+    try:
+        return round(float(result['value']), 4)
+    except:
+        api = a.shuffleKeys(api)
+
+        return ultOSC(ticker, api)
+        
 
 # directional movement index
 def DMI(ticker='BTC', val = 'plusdi', api = 1):
@@ -155,8 +176,13 @@ def DMI(ticker='BTC', val = 'plusdi', api = 1):
     # Extract data in json format 
     result = response.json() 
     
-    return round(float(result[val]), 4)
+    try:
+        return round(float(result[val]), 4)
+    except:
+        api = a.shuffleKeys(api)
 
+        return DMI(ticker, val, api)
+    
 # Rate of Change Indicator
 def ROC(ticker='BTC', api=1):
     # Define indicator
@@ -180,9 +206,14 @@ def ROC(ticker='BTC', api=1):
     response = requests.get(url = endpoint, params = parameters)
     
     # Extract data in json format 
-    result = response.json() 
+    result = response.json()
 
-    return round(float(result['value']), 4)
+    try:
+        return round(float(result['value']), 4)
+    except:
+        api = a.shuffleKeys(api)
+
+        return ROC(ticker, api)
 
 def direction(ticker='BTC', api = 1):
     # Define indicator
@@ -208,7 +239,12 @@ def direction(ticker='BTC', api = 1):
     # Extract data in json format 
     result = response.json() 
 
-    return round(float(result['value']), 4)
+    try:
+        return round(float(result['value']), 4)
+    except:
+        api = a.shuffleKeys(api)
+
+        return direction(ticker, api)
 
 def price(ticker='BTC'):
     login()
@@ -220,23 +256,21 @@ def buy(ticker, amountInAsset):
 
 def sell(ticker, amountInAsset):
     r.order_sell_crypto_by_quantity(ticker, amountInAsset)
-
-
     
 def dataPoints(ticker='BTC', API = 1):
     success = False
+
     while not success:
+        print(API)
+
         try:
             success = True
             data = getData(ticker, API)
         except:
             success = False
-            if (API == 1):
-                API = 2
-            elif (API == 2):
-                API = 3
-            elif (API == 3):
-                API = 1
+            key = a.shuffleKeys(key)
+
+        print("\n")
     print("Ticker: " + ticker)
     return data
 
