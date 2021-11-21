@@ -283,13 +283,10 @@ def getData(symbols=a.getHeaders(), ticker = 'BTC', API = 1):
 def dataPoints(ticker='BTC', API = 1, symbols = a.getHeaders()):
     success = False
 
-    print("data started running")
     while not success:
         try:
-            print("started query")
             success = True
             data = getData(symbols, ticker, API)
-            print("finished query")
         except:
             success = False
             

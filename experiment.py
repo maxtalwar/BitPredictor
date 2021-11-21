@@ -1,5 +1,4 @@
 import robin_stocks.robinhood as r
-import dataScrape as d
 import regression
 import analysis as a
 from time import sleep
@@ -180,10 +179,9 @@ print("gathered data two")
 
 print(dataTwo)"""
 
-API = 1
 ticker = "BTC"
 
 #test = [d.RSI(ticker, api = API), d.ultOSC(ticker, api = API), d.stochRSI(ticker, api = API), d.DMI(ticker, val = 'plusdi', api = API)]
-test = data.getData(a.getHeaders(), ticker, API)
+test = data.getData(ticker = ticker)
 
 print(test)
