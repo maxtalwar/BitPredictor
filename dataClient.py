@@ -15,7 +15,7 @@ def getPwd():
 def login():
     # Logs into Robinhood
     pwd = getPwd()
-    r.login(username="nicktalwar",
+    r.login(username="",
          password=pwd,
          expiresIn=86400,
          by_sms=True)
